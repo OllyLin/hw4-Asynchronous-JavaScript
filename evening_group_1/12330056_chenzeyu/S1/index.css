@@ -1,11 +1,11 @@
 * {
   margin: 0;
   padding: 0;
-  -webkit-transition: all 1s ease-in-out;
-  -moz-transition: all 1s ease-in-out;
-  -ms-transition: all 1s ease-in-out;
-  -o-transition: all 1s ease-in-out;
-  transition: all 1s ease-in-out;
+  -webkit-transition: all 2s ease-in-out;
+  -moz-transition: all 2s ease-in-out;
+  -ms-transition: all 2s ease-in-out;
+  -o-transition: all 2s ease-in-out;
+  transition: all 2s ease-in-out;
 }
 body {
   font-family: "Microsoft YaHei";
@@ -40,13 +40,15 @@ li {
   position: relative;
   top: 40px;
 }
+.total {
+  visibility: hidden;
+}
 
 #control-ring-container li {
   border-radius: 50%;
   position: absolute;
   height: 35px;
   width: 35px;
-  opacity: 1;
   left: 50%;
   bottom: 200px;
   opacity: 0;
@@ -76,9 +78,10 @@ li {
   bottom: 140px;
 }
 .button {
-  background-color: #303f9f;
+  background-color: blue;
   color: #339900;
   padding: auto;
+  cursor: pointer;
 }
 .word {
   position: absolute;
@@ -96,13 +99,14 @@ li {
   left: 20px;
   top: -5px;
   background-color: red;
+  visibility: hidden;
 }
 .apb {
   position: absolute;
   width: 35px;
   height: 35px;
   background: url("assets/images/atplus_white.png") no-repeat center;
-  background-color: #999fd3;
+  background-color: #999FD3;
   left: 50%;
   bottom: 200px;
   border-radius: 50%;
