@@ -104,64 +104,11 @@ var askForRandomNumberFromServer = function(button, disabledId, currentSum, orde
             if (atplusButton.getAttribute('clicked') === "true") {
                 var err = Math.round(Math.random());
                 if (err) {
-                    button.setAttribute('disabled', 'false');
-                    button.style.backgroundColor = "rgba(48, 63, 159, 1)";
-                    checkIfAllButtonGotAResultAndAbleTheBigOneIfSo();
-                    switch (caller) {
-                        case 'A':
-                            aHandler(currentSum, order);
-                            break;
-                        case 'B':
-                            bHandler(currentSum, order);
-                            break;
-                        case 'C':
-                            cHandler(currentSum, order);
-                            break;
-                        case 'D':
-                            dHandler(currentSum, order);
-                            break;
-                        case 'E':
-                            eHandler(currentSum, order);
-                            break;
-                    }
+                    errorHandler(button, caller, currentSum, order);
                 } else {
                     checkIfAllButtonGotAResultAndAbleTheBigOneIfSo();
                     currentSum += parseInt(xmlhttp.responseText);
-                    switch (order[0]) {
-                        case 'A':
-                            order.shift();
-                            aHandler(currentSum, order);
-                            break;
-                        case 'B':
-                            order.shift();
-                            bHandler(currentSum, order);
-                            break;
-                        case 'C':
-                            order.shift();
-                            cHandler(currentSum, order);
-                            break;
-                        case 'D':
-                            order.shift();
-                            dHandler(currentSum, order);
-                            break;
-                        case 'E':
-                            order.shift();
-                            eHandler(currentSum, order);
-                            break;
-                        default:
-                            var bigButton = document.getElementById('info-bar');
-                            bigButton.click();
-                            var result = 0;
-                            for (key in buttons) {
-                                if (!isNaN(key)) {
-                                    result += parseInt(buttons[key].getElementsByTagName('span')[1].innerHTML);
-                                }
-                            }
-                            atplusButton.setAttribute('clicked', "true");
-                            document.getElementById('message').innerHTML = "大气泡:楼主异步调用战斗力感人，目测不超过" + result;
-                            break;
-                    }
-
+                    callNextHandler(currentSum, order);
                 }
             }
         }
@@ -264,4 +211,66 @@ var getRandomOrder = function() {
     }
     return order;
 };
+
+var errorHandler = function(button, caller, currentSum, order) {
+    button.setAttribute('disabled', 'false');
+    button.style.backgroundColor = "rgba(48, 63, 159, 1)";
+    checkIfAllButtonGotAResultAndAbleTheBigOneIfSo();
+    switch (caller) {
+        case 'A':
+            aHandler(currentSum, order);
+            break;
+        case 'B':
+            bHandler(currentSum, order);
+            break;
+        case 'C':
+            cHandler(currentSum, order);
+            break;
+        case 'D':
+            dHandler(currentSum, order);
+            break;
+        case 'E':
+            eHandler(currentSum, order);
+            break;
+    }
+};
+
+var callNextHandler = function(currentSum, order) {
+    switch (order[0]) {
+        case 'A':
+            order.shift();
+            aHandler(currentSum, order);
+            break;
+        case 'B':
+            order.shift();
+            bHandler(currentSum, order);
+            break;
+        case 'C':
+            order.shift();
+            cHandler(currentSum, order);
+            break;
+        case 'D':
+            order.shift();
+            dHandler(currentSum, order);
+            break;
+        case 'E':
+            order.shift();
+            eHandler(currentSum, order);
+            break;
+        default:
+            var bigButton = document.getElementById('info-bar');
+            bigButton.click();
+            var result = 0;
+            var buttons = document.getElementById('control-ring').getElementsByTagName('li');
+            for (var key in buttons) {
+                if (!isNaN(key)) {
+                    result += parseInt(buttons[key].getElementsByTagName('span')[1].innerHTML);
+                }
+            }
+            atplusButton.setAttribute('clicked', "true");
+            document.getElementById('message').innerHTML = "大气泡:楼主异步调用战斗力感人，目测不超过" + result;
+            break;
+    }
+};
+
 
