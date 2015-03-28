@@ -1,0 +1,168 @@
+body {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+}
+ul li {
+	list-style: none;
+}
+#at-plus-container {
+	width: 300px;
+	position: relative;
+	top: 380px;
+	left: 40%;
+}
+#bottom-positioner {
+	width: 300px;
+	height: 150px;
+}
+#button {
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	transition: all 0.5s;
+}
+.apb {
+	background-color: #585858;
+	width: 30px;
+	height: 30px;
+	border-radius: 15px;
+	background-image: url("assets/images/atplus_white.png");
+	background-repeat: no-repeat;
+	background-position: 4px 8px;
+	background-size: 80%;
+	opacity: 0.5;
+
+	position: absolute;
+	top: 45px;
+	left: 48%;
+
+	-webkit-transition: all 0.5s 0.5s;
+	-moz-transition: all 0.5s 0.5s;
+	transition: all 0.5s 0.5s;
+}
+#itemA, #itemB, #itemC, #itemD, #itemE {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 15px;
+	background-color: #2146A1;
+	color: #24E19D;
+	opacity: 0;
+	
+	position: absolute;
+	top: 45px;
+	left: 48%;
+
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	transition: all 0.5s;
+}
+.unread {
+	position: absolute;
+	top: -2px;
+	left: 20px;
+
+	background-color: #CC0000;
+	width: 15px;
+	height: 15px;
+	border-radius: 10px;
+
+	color: #FFFFFF;
+	line-height: 15px;
+	font-size: 10px;
+
+	visibility: hidden;
+}
+#control-ring {
+	font-size: 20px;
+}
+.info {
+	background-color: #7E7E7E;
+	width: 30px;
+	height: 30px;
+	border-radius: 55px;
+	
+	font-size: 30px;
+	color: #24E19D;
+	opacity: 0;
+
+	position: absolute;
+	top: 45px;
+	left: 48%;
+	overflow: hidden;
+
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	transition: all 0.5s;
+}
+#button:hover {
+	width: 300px;
+	height: 150px;
+	margin: 0 auto;
+}
+#button:hover #info-bar ul {
+	padding: 0;
+	margin: 0;
+}
+#button:hover #info-bar .info {
+	width: 110px;
+	height: 110px;
+	line-height: 110px;
+	border-radius: 55px;
+	opacity: 1;
+	position: absolute;
+	top: -75px;
+	left: 38%;
+}
+#button:hover .apb {
+	background-color: #2146A1;
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
+	background-image: url("assets/images/atplus_green.png");
+	background-repeat: no-repeat;
+	background-position: 8px 15px;
+	background-size: 70%;
+	opacity: 0.8;
+
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	transition: all 0.5s;
+}
+#button:hover #itemA {
+	opacity: 1;
+
+	position: absolute;
+	top: 19px;
+	left: 32%;
+}
+#button:hover #itemB {
+	opacity: 1;
+
+	position: absolute;
+	top: 56px;
+	left: 29%;
+}
+#button:hover #itemC {
+	opacity: 1;
+
+	position: absolute;
+	top: 92px;
+	left: 33%;
+}
+#button:hover #itemD {
+	opacity: 1;
+
+	position: absolute;
+	top: 110px;
+	left: 45%;
+}
+#button:hover #itemE {
+	opacity: 1;
+
+	position: absolute;
+	top: 108px;
+	left: 58%;
+}
