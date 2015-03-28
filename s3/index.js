@@ -9,11 +9,18 @@ window.onload = function() {
 		enable(buttons[i]);
 		xhrList[i] = new XMLHttpRequest();
 		buttons[i].addEventListener('click', function(i) {    //给每个按钮设置click的监听器，click时获取随机数
-			return function() {
+			return function(event) {
 				var that = buttons[i];
 				if (that.classList.contains('enable')) {
 					var randomNum;
 					var num = that.children[1];
+					if (event.x) {
+						for (var j = 0; j < buttons.length; j++) {
+							if (buttons[j] != that) {
+								disable(buttons[j]);
+							}
+						}
+					}
 					num.classList.remove('hidden');
 					num.classList.add('show');
 					num.innerHTML = '...';
@@ -22,11 +29,20 @@ window.onload = function() {
 						if (xhrList[i].readyState == 4 && xhrList[i].status == 200) {
 							randomNum = xhrList[i].responseText;
 							num.innerHTML = randomNum;
+							for (var j = 0; j < buttons.length; j++) {
+								if (buttons[j].children[1].innerHTML == '...') {
+									enable(buttons[j]);
+								} else {
+									disable(buttons[j]);
+								}
+							}
 							disable(buttons[i]);
 							if (allNumGet()) {
 								var sum = document.getElementById('info-bar');
 								enable(sum);
-								sum.click();
+								if (!event.x) {
+									sum.click();
+								}
 							}
 						}
 					}

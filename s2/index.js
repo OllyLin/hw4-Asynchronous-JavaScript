@@ -7,7 +7,7 @@ window.onload = function() {
 	for (var i = 0; i < buttons.length; i++) {     //激活每一个按钮
 		enable(buttons[i]);
 		buttons[i].addEventListener('click', function(i) {    //给每个按钮设置click的监听器，click时获取随机数
-			return function() {
+			return function(event) {
 				var that = this;
 				if (that.classList.contains('enable')) {
 					var randomNum;
@@ -34,9 +34,13 @@ window.onload = function() {
 							if (allNumGet()) {
 								var sum = document.getElementById('info-bar');
 								enable(sum);
-								sum.click();
+								if (!event.x) {
+									sum.click();
+								}
 							} else {     //点击下一个button
-								buttons[i+1].click();
+								if (!event.x) {
+									buttons[i+1].click();
+								}
 							}
 						}
 					}

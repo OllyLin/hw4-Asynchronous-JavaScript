@@ -8,12 +8,11 @@ window.onload = function() {
 	var sequence = [0,1,2,3,4];
 	var choice = 0;
 	sequence.sort(function(){return Math.random()>0.5?-1:1;});
-	alert(sequence);
 
 	for (var i = 0; i < buttons.length; i++) {     //激活每一个按钮
 		enable(buttons[i]);
 		buttons[i].addEventListener('click', function(i) {    //给每个按钮设置click的监听器，click时获取随机数
-			return function() {
+			return function(event) {
 				choice += 1;
 				var that = this;
 				if (that.classList.contains('enable')) {
@@ -41,9 +40,13 @@ window.onload = function() {
 							if (allNumGet()) {
 								var sum = document.getElementById('info-bar');
 								enable(sum);
-								sum.click();
+								if (!event.x) {
+									sum.click();
+								}
 							} else {     //点击下一个button
-								buttons[sequence[choice]].click();
+								if (!event.x) {
+									buttons[sequence[choice]].click();
+								}	
 							}
 						}
 					}
@@ -65,12 +68,14 @@ window.onload = function() {
 	    if (target != this) {
 	    	xhr.abort();
 	    	choice = 0;
+	    	sequence = [0,1,2,3,4];
 	    	sequence.sort(function(){return Math.random()>0.5?-1:1;}); 
 	    	var sum = document.getElementById('info-bar');
 			var buttons = document.getElementById('control-ring-container').getElementsByTagName('li');
 			sum.classList.remove('enable');
 			sum.classList.add('disable');
 			sum.getElementsByClassName('page_comment')[0].innerHTML = '';
+			sum.getElementsByClassName('mine_posted')[0].innerHTML = '';
 			for (var i = 0; i < buttons.length; i++) {
 				buttons[i].children[1].classList.remove('show');
 				buttons[i].children[1].classList.add('hidden');
@@ -84,7 +89,24 @@ window.onload = function() {
 		buttons[sequence[choice]].click();
 	});
 
-	sum.addEventListener('click', getSum);     //给大气泡设置click的监听器，click时求和
+	sum.addEventListener('click', function(event) {     //给大气泡设置click的监听器，click时求和
+		if (this.classList.contains('enable')) {
+			var output = this.getElementsByClassName('page_comment')[0];
+			var show = this.getElementsByClassName('mine_posted')[0];
+			var num = document.getElementById('control-ring-container').getElementsByTagName('li');
+			var sum = 0;
+			for (var i = 0; i < num.length; i++) {
+				sum += parseInt(num[i].children[1].innerHTML);
+			}
+			getSequence(sequence);
+			output.innerHTML = sum;
+			if (!event.x){
+				show.innerHTML = sequence;
+			}
+			this.classList.remove('enable');
+			this.classList.add('disable');
+		}
+	});
 }
 
 function disable(button) {     //灭活按钮
@@ -107,16 +129,18 @@ function allNumGet() {    //判断是不是已经获得所有数据
 	return true;
 }
 
-function getSum() {     //求和
-	if (this.classList.contains('enable')) {
-		var output = this.getElementsByClassName('page_comment')[0];
-		var num = document.getElementById('control-ring-container').getElementsByTagName('li');
-		var sum = 0;
-		for (var i = 0; i < num.length; i++) {
-			sum += parseInt(num[i].children[1].innerHTML);
+function getSequence(sequence) {
+	for (var i = 0; i < sequence.length; i++) {
+		if (sequence[i] == 0) {
+			sequence[i] = 'A';
+		} else if (sequence[i] == 1) {
+			sequence[i] = 'B';
+		} else if (sequence[i] == 2) {
+			sequence[i] = 'C';
+		} else if (sequence[i] == 3) {
+			sequence[i] = 'D';
+		} else {
+			sequence[i] = 'E';
 		}
-		output.innerHTML = sum;
-		this.classList.remove('enable');
-		this.classList.add('disable');
 	}
 }
