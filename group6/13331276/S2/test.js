@@ -1,4 +1,5 @@
 window.onload = init;
+var allLi;
 function getNumber(targetSpan) {
 	var xmlhttp;
 	if (window.XMLHttpRequest) {
@@ -15,6 +16,7 @@ function getNumber(targetSpan) {
 				target.parentNode.datagotton = true;
 				changeAllListatus(false, target.parentNode);
 				changeSumStatus();
+				robotControl();
 			}
 		}
 	}(targetSpan, xmlhttp);
@@ -22,9 +24,8 @@ function getNumber(targetSpan) {
 	xmlhttp.send();
 }
 
-var allLi;
-
 function buttonClicked(targetLi) {
+	//console.log("clicked");
 	return function() {
 		if (!targetLi.clickable)
 			return;
@@ -51,15 +52,19 @@ function makeAllLiClickable() {
 	sumTarget.onclick = function() {
 		if (!this.clickable)
 			return;
-		var allSpan = document.getElementsByTagName("span");
+		document.getElementById("sum").innerHTML = calSum();
+	}
+	changeAllListatus(false, 0);
+	changeSumStatus();
+}
+
+function calSum() {
+	var allSpan = document.getElementsByTagName("span");
 		var sum = 0;
 		for (var count = 0; count < allSpan.length; count++) {
 			sum += parseInt(allSpan[count].innerHTML);
 		}
-		document.getElementById("sum").innerHTML = sum;
-	}
-	changeAllListatus(false, 0);
-	changeSumStatus();
+		return sum;
 }
 
 function updateAllLi() {
@@ -99,6 +104,7 @@ function changeSumStatus() {
 		var sumTarget = document.getElementById("info-bar");
 		sumTarget.style.backgroundColor = "#7e7e7e";
 		sumTarget.clickable = true;
+		sumTarget.onclick();
 	}
 }
 
@@ -107,9 +113,20 @@ function init() {
 	target.onmouseenter = function() {
 		makeAllLiClickable();
 	}
+	var atButton;
+	var allDiv = document.getElementsByTagName("div");
+	for (var count = 0; count < allDiv.length; count++) {
+		if (allDiv[count].className.match("icon"))
+			allDiv[count].onclick = robotControl;
+	}
 	//makeAllLiClickable();
 }
 
 function robotControl() {
-	
+	for (var count = 0; count < allLi.length; count++) {
+		if (!allLi[count].datagotton) {
+			buttonClicked(allLi[count])();
+			break;
+		}
+	}
 }

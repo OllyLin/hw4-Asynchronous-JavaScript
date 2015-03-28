@@ -1,4 +1,5 @@
 window.onload = init;
+var allLi;
 function getNumber(targetSpan) {
 	var xmlhttp;
 	if (window.XMLHttpRequest) {
@@ -15,6 +16,7 @@ function getNumber(targetSpan) {
 				target.parentNode.datagotton = true;
 				changeAllListatus(false, target.parentNode);
 				changeSumStatus();
+				robotControl();
 			}
 		}
 	}(targetSpan, xmlhttp);
@@ -22,9 +24,8 @@ function getNumber(targetSpan) {
 	xmlhttp.send();
 }
 
-var allLi;
-
 function buttonClicked(targetLi) {
+	//console.log("clicked");
 	return function() {
 		if (!targetLi.clickable)
 			return;
@@ -54,12 +55,14 @@ function makeAllLiClickable() {
 		var allSpan = document.getElementsByTagName("span");
 		var sum = 0;
 		for (var count = 0; count < allSpan.length; count++) {
+			//alert(parseInt(allSpan[count].innerHTML));
 			sum += parseInt(allSpan[count].innerHTML);
 		}
 		document.getElementById("sum").innerHTML = sum;
 	}
 	changeAllListatus(false, 0);
 	changeSumStatus();
+	document.getElementById("textDisplay").innerHTML = "";
 }
 
 function updateAllLi() {
@@ -99,6 +102,7 @@ function changeSumStatus() {
 		var sumTarget = document.getElementById("info-bar");
 		sumTarget.style.backgroundColor = "#7e7e7e";
 		sumTarget.clickable = true;
+		sumTarget.onclick();
 	}
 }
 
@@ -107,9 +111,46 @@ function init() {
 	target.onmouseenter = function() {
 		makeAllLiClickable();
 	}
-	//makeAllLiClickable();
+	var atButton;
+	var allDiv = document.getElementsByTagName("div");
+	for (var count = 0; count < allDiv.length; count++) {
+		if (allDiv[count].className.match("icon"))
+			allDiv[count].onclick = getOrder;
+	}
 }
 
 function robotControl() {
+	for (var count = 0; count < allLi.length; count++) {
+		buttonClicked(allLi[order[count]])();
+	}
+}
+
+var order = new Array();
+function getOrder() {
+	for (var count = 0; count < allLi.length; count++) {
+		var ran;
+		do {
+			ran = Math.floor(Math.random() * allLi.length);
+			var temp = 0;
+			for (; temp < count; temp++) {
+				if (order[temp] == ran)
+					break;
+			}
+			if (temp == count) {
+				order[count] = ran;
+				break;
+			}
+		}while(true);
+	}
 	
+	var textDisplay = "(";
+	for (var count = 0; count < order.length; count++) {
+		textDisplay += allLi[order[count]].innerHTML[0];
+		if (count < order.length - 1)
+			textDisplay += "、";
+	}
+	textDisplay += ")";
+	//alert(textDisplay);
+	document.getElementById("textDisplay").innerHTML = textDisplay;
+	robotControl();
 }

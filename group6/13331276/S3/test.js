@@ -25,11 +25,12 @@ function getNumber(targetSpan) {
 var allLi;
 
 function buttonClicked(targetLi) {
+	//console.log("clicked");
 	return function() {
 		if (!targetLi.clickable)
 			return;
 			targetLi.clickable = false;
-			changeAllListatus(true, targetLi);
+			//changeAllListatus(true, targetLi);
 			targetLi.lastChild.innerHTML = "...";
 			targetLi.lastChild.style.opacity = 1;
 			getNumber(targetLi.lastChild);
@@ -99,6 +100,7 @@ function changeSumStatus() {
 		var sumTarget = document.getElementById("info-bar");
 		sumTarget.style.backgroundColor = "#7e7e7e";
 		sumTarget.clickable = true;
+		sumTarget.onclick();
 	}
 }
 
@@ -107,9 +109,19 @@ function init() {
 	target.onmouseenter = function() {
 		makeAllLiClickable();
 	}
+	var atButton;
+	var allDiv = document.getElementsByTagName("div");
+	for (var count = 0; count < allDiv.length; count++) {
+		if (allDiv[count].className.match("icon"))
+			allDiv[count].onclick = robotControl;
+	}
 	//makeAllLiClickable();
 }
 
 function robotControl() {
-	
+	//alert("a");
+	//buttonClicked(allLi[0])();
+	for (var count = 0; count < allLi.length; count++) {
+		setTimeout(buttonClicked(allLi[count]), 0);
+	}
 }
