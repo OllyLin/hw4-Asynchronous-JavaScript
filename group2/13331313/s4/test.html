@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+  <head>
+    <title>»·ÐÎ°´Å¥</title>
+    <meta charset="utf-8">
+    <link rel="icon" sizes="196x196" href="favicon.png">
+    <link rel="stylesheet" type="text/css" href="button.css">
+    <script type="text/javascript" src="ts.js"></script>
+  </head>
+  <body>
+    <input type="checkbox" id="checkbox"/><label for="checkbox">Checkbox</label>
+    <input type="button" onclick="simulateClick();" value="Simulate click"/>
+    <script>
+        function preventDef(event) {
+          event.preventDefault();
+        }
+
+        function addHandler() {
+          document.getElementById("checkbox").addEventListener("click", 
+            preventDef, false);
+        }
+
+        function removeHandler() {
+          document.getElementById("checkbox").removeEventListener("click",
+            preventDef, false);
+        }
+
+        function simulateClick() {
+          var evt = document.createEvent("MouseEvents");
+          evt.initMouseEvent("click", true, true, window,
+            0, 0, 0, 0, 0, false, false, false, false, 0, null);
+          var cb = document.getElementById("checkbox"); 
+          var canceled = !cb.dispatchEvent(evt);
+          if(canceled) {
+            // A handler called preventDefault
+            alert("canceled");
+          } else {
+            // None of the handlers called preventDefault
+            alert("not canceled");
+          }
+        }
+        
+        function done() {
+            alert('done');
+        }
+        window.onload = function() {
+            var event = document.createEvent('MouseEvents');
+            event.initMouseEvent("click", true, true, window, 0, 0, 0, 0, false, false, false, false, 0, null);
+            var checkbox = document.getElementById('checkbox');
+            checkbox.dispatchEvent(event, done());
+        }
+    </script>
+  </body>
