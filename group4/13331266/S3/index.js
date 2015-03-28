@@ -12,12 +12,12 @@ window.onload = function(){
 
 function s3(){
   var icon = document.getElementById("icon");
-  icon.removeEventListener("click",s1);
+  icon.removeEventListener("click",s3);
   var circle = document.getElementById("control-ring");
   var abcde = circle.children;
     for(var i = 0; i < abcde.length; i++){
     getNumber(abcde[i]);
-  }  
+  }
 }
 
 function makeDisable(me){
@@ -64,8 +64,7 @@ function getNumber(me){
     }
     if(flag == 1){
       result = document.getElementById("info");
-      result.addEventListener("click", getResult);
-      result.style.backgroundColor = "blue";
+      getResult(result);
     } 
     }
 }
@@ -73,14 +72,15 @@ xmlhttp.open("GET","/?randnum="+Math.random(),true);
 xmlhttp.send();
 };
 
-function getResult(){
+function getResult(me){
     var circle = document.getElementById("control-ring");
     var abcde = circle.children;
     var sum = 0;
     for(var i = 0; i < abcde.length; i++){
       sum = sum +parseInt(abcde[i].lastChild.innerText);
     }
-    this.innerHTML = sum;
-    this.removeEventListener("click", getResult)
+    if(!isNaN(sum)){
+      me.innerHTML = sum;
+    }
     result.style.backgroundColor = "grey";
 }
