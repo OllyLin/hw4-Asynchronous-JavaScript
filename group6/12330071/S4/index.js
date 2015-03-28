@@ -36,11 +36,13 @@ function addBaseFunctionToDomObject() {
 
 function addEventToHoverButton() {
   var button = document.getElementById('button');
-  button.addEventListener('click', function() {
+  var apbButton = document.getElementsByClassName('icon')[0];
+  apbButton.addEventListener('click', function(event) {
     button.addClass('buttonHover');
+    console.log('haha')
     var buttons = getWordButtons();
     if (!whetherConditionEnough(buttons)) {
-      setTimeout("simulateInOrder(0, 100)", 1000);
+      setTimeout(_simulateInOrder(0, 100, [0,1,2,3,4]), 1000);
     }
   });
 }
@@ -176,15 +178,22 @@ function calculateSumFromButton(buttons) {
   return sum;
 }
 
-function simulateInOrder(index, time) {
-  var buttons = getWordButtons();
-  index += Math.floor(Math.random() * 1000);
-  index = index % 5;
-  if (!buttons[index].hasClass('forbidden')) {
-    buttons[index].click();
+// Return a function with parameters for settimeout to call 
+function _simulateInOrder(index, time, order) {
+  return function() {
+    simulateInOrder(index, time, order);
   }
-  if (!whetherConditionEnough(buttons)) {
-    setTimeout('simulateInOrder(' + index + ', ' + time + ')', time);
+}
+
+function simulateInOrder(index, time, order) {
+  var buttons = getWordButtons();
+  console.log('haha');
+  if (!buttons[order[index]].hasClass('forbidden')) {
+    buttons[order[index]].click();
+    index += 1;
+  }
+  if (index < 5) {
+    setTimeout(_simulateInOrder(index, time, order), time);
   } else {
     setTimeout(calculateResult, time);
   }
