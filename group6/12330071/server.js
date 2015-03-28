@@ -10,7 +10,6 @@ http.createServer(function(req,res){
   if (!!mimeType) {
     handlePage(req, res, pathname);
   } else {
-    console.log('ajax');
     handleAjax(req, res);
   }
 }).listen(port, function(){
