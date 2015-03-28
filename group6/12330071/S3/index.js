@@ -36,11 +36,12 @@ function addBaseFunctionToDomObject() {
 
 function addEventToHoverButton() {
   var button = document.getElementById('button');
-  button.addEventListener('click', function() {
+  var apbButton = document.getElementsByClassName('icon')[0];
+  apbButton.addEventListener('click', function(event) {
     button.addClass('buttonHover');
     var buttons = getWordButtons();
-    if (!whetherConditionEnough(buttons)) {
-      setTimeout("simulateInOrder(0, 0)", 1000);
+    for (var i = 0; i < 6; i++) {
+      setTimeout(simulateInOrder, 1000);
     }
   });
 }
@@ -91,30 +92,31 @@ function addEventToButton(button, buttons) {
     numSpan.innerHTML = "..."
     numSpan.removeClass('hidden');
     getData('http://localhost:3000', function(data) {
-      acceptOtherButtons(button, buttons);
+      // acceptOtherButtons(button, buttons);
       button.addClass('disable');
       numSpan.innerHTML = data;
+      simulateInOrder();
     }, function() {
       // To do
     });
   });
 }
 
-function forbiddenOtherButtons(button, buttons) {
-  for (var i = 0; i < buttons.length; i++) {
-    if (buttons[i] !== button) {
-      buttons[i].addClass('forbidden');
-    }
-  }
-}
+// function forbiddenOtherButtons(button, buttons) {
+//   for (var i = 0; i < buttons.length; i++) {
+//     if (buttons[i] !== button) {
+//       buttons[i].addClass('forbidden');
+//     }
+//   }
+// }
 
-function acceptOtherButtons(button, buttons) {
-  for (var i = 0; i < buttons.length; i++) {
-    if (buttons[i] !== button && buttons[i].hasClass('forbidden')) {
-      buttons[i].removeClass('forbidden');
-    }
-  }
-}
+// function acceptOtherButtons(button, buttons) {
+//   for (var i = 0; i < buttons.length; i++) {
+//     if (buttons[i] !== button && buttons[i].hasClass('forbidden')) {
+//       buttons[i].removeClass('forbidden');
+//     }
+//   }
+// }
 
 function getData(url, successFunc, failFunc) {
   var XMLHttp = getXmlHttpRequest();
@@ -176,15 +178,17 @@ function calculateSumFromButton(buttons) {
   return sum;
 }
 
-function simulateInOrder(index, time) {
+var simulateInOrder = function() {
   var buttons = getWordButtons();
-  if (!buttons[index].hasClass('forbidden')) {
+  var index = 0;
+  return function() {
+    if (index >= 5) {
+      if (whetherConditionEnough(buttons)) {
+        calculateResult();
+      }
+      return;
+    }
     buttons[index].click();
     index += 1;
-  }
-  if (index < 5) {
-    setTimeout('simulateInOrder(' + index + ', ' + time + ')', time);
-  } else {
-    setTimeout(calculateResult, time);
-  }
-}
+  };
+}();

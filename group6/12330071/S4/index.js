@@ -39,11 +39,8 @@ function addEventToHoverButton() {
   var apbButton = document.getElementsByClassName('icon')[0];
   apbButton.addEventListener('click', function(event) {
     button.addClass('buttonHover');
-    console.log('haha')
     var buttons = getWordButtons();
-    if (!whetherConditionEnough(buttons)) {
-      setTimeout(_simulateInOrder(0, 100, [0,1,2,3,4]), 1000);
-    }
+    setTimeout(simulateInOrder, 1000);
   });
 }
 
@@ -96,6 +93,7 @@ function addEventToButton(button, buttons) {
       acceptOtherButtons(button, buttons);
       button.addClass('disable');
       numSpan.innerHTML = data;
+      simulateInOrder();
     }, function() {
       // To do
     });
@@ -185,16 +183,32 @@ function _simulateInOrder(index, time, order) {
   }
 }
 
-function simulateInOrder(index, time, order) {
+var simulateInOrder = function() {
   var buttons = getWordButtons();
-  console.log('haha');
-  if (!buttons[order[index]].hasClass('forbidden')) {
-    buttons[order[index]].click();
-    index += 1;
+  var index = 0;
+  var orderList;
+  return function() {
+    if (index === 5) {
+      calculateResult();
+      return;
+    }
+    if (typeof orderList === 'undefined') {
+      orderList = initializeOrderList();
+    }
+    if (!buttons[orderList[index]].hasClass('forbidden')) {
+      buttons[orderList[index]].click();
+      index += 1
+    }
+  };
+}();
+
+function initializeOrderList() {
+  var list = [];
+  while (list.length < 5) {
+    var number = Math.floor(Math.random() * 5);
+    if (list.indexOf(number) < 0) {
+      list.push(number);
+    }
   }
-  if (index < 5) {
-    setTimeout(_simulateInOrder(index, time, order), time);
-  } else {
-    setTimeout(calculateResult, time);
-  }
+  return list;
 }

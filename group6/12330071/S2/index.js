@@ -36,12 +36,11 @@ function addBaseFunctionToDomObject() {
 
 function addEventToHoverButton() {
   var button = document.getElementById('button');
-  button.addEventListener('click', function() {
+  var apbButton = document.getElementsByClassName('icon')[0];
+  apbButton.addEventListener('click', function(event) {
     button.addClass('buttonHover');
     var buttons = getWordButtons();
-    if (!whetherConditionEnough(buttons)) {
-      setTimeout("simulateInOrder(0, 100)", 1000);
-    }
+    setTimeout(simulateInOrder, 1000);
   });
 }
 
@@ -54,7 +53,7 @@ function initializeButtons() {
     var numSpan = buttons[i].getElementsByClassName('unread')[0];
     numSpan.addClass('hidden');
     numSpan.innerHTML = '';
-    buttons[i].removeClass('forbidden');
+    // buttons[i].removeClass('forbidden');
     buttons[i].removeClass('disable');
   }
   var result = document.getElementById('result');
@@ -94,6 +93,7 @@ function addEventToButton(button, buttons) {
       acceptOtherButtons(button, buttons);
       button.addClass('disable');
       numSpan.innerHTML = data;
+      simulateInOrder();
     }, function() {
       // To do
     });
@@ -176,15 +176,17 @@ function calculateSumFromButton(buttons) {
   return sum;
 }
 
-function simulateInOrder(index, time) {
+var simulateInOrder = function() {
   var buttons = getWordButtons();
-  if (!buttons[index].hasClass('forbidden')) {
+  var index = 0;
+  return function() {
+    if (index >= 5) {
+      if (whetherConditionEnough(buttons)) {
+        calculateResult();
+      }
+      return;
+    }
     buttons[index].click();
     index += 1;
-  }
-  if (index < 5) {
-    setTimeout('simulateInOrder(' + index + ', ' + time + ')', time);
-  } else {
-    setTimeout(calculateResult, time);
-  }
-}
+  };
+}();
