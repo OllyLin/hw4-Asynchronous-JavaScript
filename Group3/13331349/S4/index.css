@@ -168,9 +168,15 @@ li {
 }
 
 #button {
-	position: absolute;
-	left: 50px;
-	top: 150px;
+  width: 40px;
+  height: 40px;
+  border-radius: 99em;
+  background-color: gray;
+  margin-left: -20px;
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  bottom: 10%;
 }
 
 #bottom-positioner:hover {
@@ -189,3 +195,4 @@ li {
 #info {
 	position: absolute;
 }
+
