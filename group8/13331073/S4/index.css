@@ -1,9 +1,9 @@
 p {
-    position: fixed;
-    margin-top: 100px;
-    margin-left: 60px;
+    position: absolute;
     font-size: 20px;
     color: rgb(100, 191, 176);
+    margin-left: -90px;
+    margin-top: -100px;
 }
 
 li {
@@ -178,7 +178,7 @@ li {
 }
 
 #at_plus { 
-    background-image: url("assets/images/atplus_white.png");
+    background-image: url("../static/assets/images/atplus_white.png");
     background-repeat: no-repeat;
     background-position: center;
     background-color: rgb(126, 126, 126);
@@ -212,7 +212,7 @@ li {
 }
 
 #button:hover #at_plus {
-    background-image: url("assets/images/atplus_green.png");
+    background-image: url("../static/assets/images/atplus_green.png");
     background-repeat: no-repeat;
     background-position: center;
     background-color: rgba(48, 63, 159, 1);

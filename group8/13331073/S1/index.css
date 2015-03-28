@@ -170,7 +170,7 @@ li {
 }
 
 #at_plus { 
-    background-image: url("assets/images/atplus_white.png");
+    background-image: url("../static/assets/images/atplus_white.png");
     background-repeat: no-repeat;
     background-position: center;
     background-color: rgb(126, 126, 126);
@@ -204,7 +204,7 @@ li {
 }
 
 #button:hover #at_plus {
-    background-image: url("assets/images/atplus_green.png");
+    background-image: url("../static/assets/images/atplus_green.png");
     background-repeat: no-repeat;
     background-position: center;
     background-color: rgba(48, 63, 159, 1);
