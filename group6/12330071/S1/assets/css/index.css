@@ -32,6 +32,11 @@ body {
   top: 0;
 }
 
+#bottom-positioner {
+  width: 300px;
+  height: 300px;
+}
+
 #control-ring li.button {
   list-style: none;
   background-repeat: no-repeat;
@@ -91,46 +96,46 @@ body {
   transition: all 0.5s 1s;
 }
 
-div#button:hover .info ul li.user {
+div.buttonHover .info ul li.user {
   left: 40px;
   top: 2px;
 }
 
-div#button:hover .info ul li.comment {
+div.buttonHover .info ul li.comment {
   left: 28px;
   top: 36px;
 }
 
-div#button:hover .info ul li.posted {
+div.buttonHover .info ul li.posted {
   left: 20px;
   top: 80px;
 }
 
-div#button:hover .info ul li.like {
+div.buttonHover .info ul li.like {
   left: 72px;
   top: 80px;
 }
 
-div#button:hover .info ul li.user img,
-div#button:hover .info ul li.mine img {
+div.buttonHover .info ul li.user img,
+div.buttonHover .info ul li.mine img {
   width: 24px;
   height: 24px;
 }
 
-div#button:hover .info ul li.user span {
+div.buttonHover .info ul li.user span {
   font-size: 20px;
 }
 
-div#button:hover .info ul li.mine span {
+div.buttonHover .info ul li.mine span {
   font-size: 16px;
 }
 
-div#button:hover .info ul li.comment img {
+div.buttonHover .info ul li.comment img {
   width: 36px;
   height: 36px;
 }
 
-div#button:hover .info ul li.comment span {
+div.buttonHover .info ul li.comment span {
   font-size: 36px;
 }
 
@@ -208,7 +213,7 @@ li .unread {
   transition: all 0.5s 1s;
 }
 
-div#button:hover #info-bar {
+div.buttonHover #info-bar {
   background-color: rgba(138,138,138,1);
   width: 140px;
   height: 140px;
@@ -216,13 +221,13 @@ div#button:hover #info-bar {
   left: -50px;
 }
 
-div#button:hover .icon {
+div.buttonHover .icon {
   background-color: rgba(48,63,159,1);
   background-image: url('../images/atplus_green.png');
   -webkit-transform: scale(1.5,1.5);
 }
 
-div#button:hover .mask {
+div.buttonHover .mask {
   background-color: rgba(48,63,159,1);
   background-size: 22px 22px;
   left: -80px;
@@ -231,7 +236,7 @@ div#button:hover .mask {
   height: 40px;
 }
 
-div#button:hover .history {
+div.buttonHover .history {
   background-color: rgba(48,63,159,1);
   background-size: 22px 22px;
   left: -85px;
@@ -240,7 +245,7 @@ div#button:hover .history {
   height: 40px;
 }
 
-div#button:hover .message {
+div.buttonHover .message {
   background-color: rgba(48,63,159,1);
   background-size: 22px 22px;
   left: -60px;
@@ -249,18 +254,18 @@ div#button:hover .message {
   height: 40px;
 }
 
-div#button:hover li .unread {
+div.buttonHover li .unread {
   font-size: 16px;
   width: 20px;
   height: 20px;
   background-color: rgba(255,89,78,1);
 }
 
-div#button:hover li .word {
+div.buttonHover li .word {
   font-size: 24px;
 }
 
-div#button:hover .setting {
+div.buttonHover .setting {
   background-color: rgba(48,63,159,1);
   background-size: 22px 22px;
   left: -10px;
@@ -269,7 +274,7 @@ div#button:hover .setting {
   height: 40px;
 }
 
-div#button:hover .sign {
+div.buttonHover .sign {
   background-color: rgba(48,63,159,1);
   background-size: 22px 22px;
   left: 40px;
@@ -298,6 +303,16 @@ div#button:hover .sign {
   transition: all 0.5s 1s;
 }
 
-div#button:hover #result {
+div.buttonHover #result {
   font-size: 36px;
+}
+
+div.buttonHover li.forbidden {
+  background-color: rgba(138,138,138,1);
+  transition: all 0.05s;
+}
+
+div.buttonHover li.disable {
+  background-color: rgba(138,138,138,1);
+  transition: all 0.5s 1s;
 }

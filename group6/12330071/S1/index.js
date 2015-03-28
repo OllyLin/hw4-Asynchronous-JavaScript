@@ -1,5 +1,6 @@
 window.onload = function() {
   addBaseFunctionToDomObject();
+  addEventToHoverButton();
   addEventToWordButtons();
   addEventToResultButton();
 }
@@ -26,10 +27,45 @@ function addBaseFunctionToDomObject() {
   }
 }
 
+function addEventToHoverButton() {
+  var button = document.getElementById('button');
+  button.addEventListener('mouseover', function() {
+    button.addClass('buttonHover');
+  });
+  button.addEventListener('mouseout', function() {
+    button.removeClass('buttonHover');
+    setTimeout(initializeButtons, 1100);
+  });
+}
+
+function initializeButtons() {
+  if (!checkWhetherPointerOut()) {
+    return;
+  }
+  var buttons = getWordButtons();
+  for (var i = 0; i < buttons.length; i++) {
+    var numSpan = buttons[i].getElementsByClassName('unread')[0];
+    numSpan.addClass('hidden');
+    numSpan.innerHTML = '';
+    buttons[i].removeClass('forbidden');
+    buttons[i].removeClass('disable');
+  }
+  var result = document.getElementById('result');
+  result.innerHTML = '';
+}
+
+function checkWhetherPointerOut() {
+  var infoBar = document.getElementById('info-bar');
+  if (infoBar.offsetHeight < 140) {
+    return true;
+  }
+  return false;
+}
+
 function addEventToWordButtons() {
   var buttons = getWordButtons();
   for (var i = 0; i < buttons.length; i++) {
-    addEventToButton(buttons[i]);
+    addEventToButton(buttons[i], buttons);
   }
 }
 
@@ -38,26 +74,39 @@ function getWordButtons() {
   return buttonFather.getElementsByTagName('li');
 }
 
-function addEventToButton(button) {
+function addEventToButton(button, buttons) {
   button.addEventListener('click', function(data) {
+    if (button.hasClass('forbidden') || button.hasClass('disable')) {
+      return;
+    }
+    forbiddenOtherButtons(button, buttons);
+    var numSpan = button.getElementsByClassName('unread')[0];
+    numSpan.innerHTML = "..."
+    numSpan.removeClass('hidden');
     getData('http://localhost:3000', function(data) {
-      var numSpan = button.getElementsByClassName('unread')[0];
+      acceptOtherButtons(button, buttons);
+      button.addClass('disable');
       numSpan.innerHTML = data;
-      numSpan.removeClass('hidden');
     }, function() {
       // To do
     });
   });
 }
 
-function getXmlHttpRequest() {
-  var XMLHttp;
-  if (window.XMLHttpRequest) {
-    XMLHttp = new XMLHttpRequest();
-  } else if (window.ActiveXObject) {
-    XMLHttp = new ActiveXObject('Microsoft.XMLHTTP');
+function forbiddenOtherButtons(button, buttons) {
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i] !== button) {
+      buttons[i].addClass('forbidden');
+    }
   }
-  return XMLHttp;
+}
+
+function acceptOtherButtons(button, buttons) {
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i] !== button && buttons[i].hasClass('forbidden')) {
+      buttons[i].removeClass('forbidden');
+    }
+  }
 }
 
 function getData(url, successFunc, failFunc) {
@@ -73,21 +122,45 @@ function getData(url, successFunc, failFunc) {
   }
 }
 
+function getXmlHttpRequest() {
+  var XMLHttp;
+  if (window.XMLHttpRequest) {
+    XMLHttp = new XMLHttpRequest();
+  } else if (window.ActiveXObject) {
+    XMLHttp = new ActiveXObject('Microsoft.XMLHTTP');
+  }
+  return XMLHttp;
+}
+
 function addEventToResultButton() {
   var resultButton = document.getElementById('info-bar');
   resultButton.addEventListener('click', function() {
     var buttons = getWordButtons();
+    if (!whetherConditionEnough(buttons)) {
+      return;
+    }
     var sum = calculateSumFromButton(buttons);
     var result = document.getElementById('result');
     result.innerHTML = sum;
   });
 }
 
+function whetherConditionEnough(buttons) {
+  for (var i = 0; i < buttons.length; i++) {
+    if (!buttons[i].hasClass('disable')) {
+      return false;
+    }
+  }
+  return true;
+}
+
 function calculateSumFromButton(buttons) {
   var sum = 0;
   for (var i = 0; i < buttons.length; i++) {
     var numSpan = buttons[i].getElementsByClassName('unread')[0];
-    sum += parseInt(numSpan.innerHTML);
+    if (numSpan.innerHTML !== '') {
+      sum += parseInt(numSpan.innerHTML);
+    }
   }
   return sum;
 }
