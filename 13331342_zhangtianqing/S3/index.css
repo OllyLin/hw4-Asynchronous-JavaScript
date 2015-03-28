@@ -1,0 +1,226 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+  font-family: "Microsoft YaHei"; 
+}
+
+li {
+    list-style-type:none;
+}
+#bottom {
+    position: relative;
+}
+.apb {
+    background-color: rgba(109, 116, 194, 0.65);
+    width: 35px;
+    height: 35px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    position: absolute;
+    margin-left: 49.5%;
+    bottom: 100px;
+    -webkit-transition: all 0.5s ease-in-out 0.2s;
+    -moz-transition: all 0.5s ease-in-out 0.2;
+    -o-transition: all 0.5s ease-in-out 0.2;
+    transition: all 0.5s ease-in-out 0.2s;
+}
+.green {
+    opacity: 0;
+}
+
+.white {
+    opacity: 1;
+}
+
+.apb img {
+    width: 22px;
+    height: 20px;
+    position: absolute;
+    top: 22%;
+    left: 20%;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+#atplus:hover .apb{
+    background-color: rgba(48, 63, 159, 1);
+    width: 55px;
+    height: 55px;
+} 
+#atplus:hover .apb img{
+    width: 28px;
+    height: 25px;
+    margin-top: 4px;
+    margin-left: 4px;
+}
+#atplus:hover .green {
+    opacity: 1;
+}
+#atplus:hover .white {
+    opacity: 0;
+}
+
+.control-ring {
+    position: relative;
+}
+
+.button {
+    width: 35px;
+    height: 35px;
+    background-color: rgba(100,100,100,0.85);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    bottom: 100px;
+    -webkit-transition: all 0.5s ease-in-out 0.1s;
+    -moz-transition: all 0.5s ease-in-out 0.1s;
+    -o-transition: all 0.5s ease-in-out 0.1s;
+    transition: all 0.5s ease-in-out 0.1s;
+    opacity: 0;
+}
+
+.button img {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 25%;
+    left: 25.45%;
+}
+
+
+#atplus:hover .mask {
+    bottom:150px;
+    margin-left: -64px;
+    opacity: 1;
+}
+#atplus:hover .history {
+    bottom:107px;
+    margin-left: -76px;
+    opacity: 1;
+}
+
+#atplus:hover .message {
+    position: absolute;
+    bottom:64px;
+    margin-left: -59px;
+    opacity: 1;
+}
+
+#atplus:hover .setting{
+    position: absolute;
+    bottom:39px;
+    margin-left: -13px;
+    opacity: 1;
+}
+
+#atplus:hover .sign {
+    position: absolute;
+    bottom:45px;
+    margin-left: 36px;
+    opacity: 1;
+}
+#control-ring li {
+    color: rgb(63, 119, 63);
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: rgb(38, 67, 157);
+}
+#control-ring li p {
+    margin-top: 3px;
+}
+.unread {
+    display: block;
+    background-color: rgb(255, 43, 16);
+    width: 18px;
+    height: 18px;
+    font-size: 0.7rem;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    position: absolute;
+    top: 4%;
+    left: 65%;
+
+}
+.info {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(100,100,100,0.8);
+    color: white;
+    width: 40px;
+    height: 40px;
+    left: 50%;
+    bottom: 100px;
+    opacity: 0;
+    overflow: hidden;
+    -webkit-transition: all 0.5s ease-in-out 0.1s;
+    -moz-transition: all 0.5s ease-in-out 0.1s;
+    -o-transition: all 0.5s ease-in-out 0.1s;
+    transition: all 0.5s ease-in-out 0.1s;
+}
+
+#atplus:hover .info {
+    width: 130px;
+    height: 130px;
+    opacity: 0.8;
+    bottom: 170px;
+    margin-left: -40px;
+}
+
+#atplus:hover .invi{
+    visibility: hidden;
+    
+}
+/*-------------------------------*/
+#atplus:hover .visible {
+    visibility: visible;
+    
+}
+/*-------------------------------*/
+
+
+
+
+#atplus:hover .disable {
+    background-color: rgb(210,210,210);
+}
+.info p {
+    color: rgb(99, 195, 151);
+    font-size: 30px;
+    font-weight: bolder;
+    text-align: center;
+    margin-top: 36px;
+}
+
+.posted {
+    margin-left: 10px;
+    display: inline;
+    float: left;
+    margin-left: 20px;
+}
+.like {
+   margin-left: 65px;
+}
+
+
+.info ul {
+    margin-top: 10px;
+}
