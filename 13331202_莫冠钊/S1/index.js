@@ -1,6 +1,9 @@
+var xmlhttp;
+
 window.onload = function() {
 	reset();
 	
+	xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsot.XMLHTTP');
 	//为大气泡绑定事件
 	var info = document.getElementById('info-bar');
 	info.addEventListener('click', info_event, false);
@@ -74,6 +77,8 @@ function is_get_all() {
 
 //重置计算器
 function reset() {
+	if (xmlhttp) xmlhttp.abort();
+
 	var info = document.getElementById('info-bar');
 	disable(info);
 	var sum = document.getElementsByClassName('mysum')[0];
@@ -127,8 +132,6 @@ function success(temp, button, xmlhttp) {
 
 //按钮事件
 function button_event(button, info) {
-
-	var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsot.XMLHTTP');
 
 	//如果此时按钮处于正在获取数据或者灭活状态则不允许进行这个事件.
 	if (button.children[0].style.display === 'block') return;

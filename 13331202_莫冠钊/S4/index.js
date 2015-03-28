@@ -1,6 +1,9 @@
+var xmlhttp;
+
 window.onload = function() {
 	reset();
-	
+	xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsot.XMLHTTP');
+
 	//为大气泡绑定事件
 	var info = document.getElementById('info-bar');
 	info.addEventListener('click', info_event, false);
@@ -28,14 +31,19 @@ window.onload = function() {
 	apb.addEventListener('transitionend', reset, false);
 
 	//绑定点击at-plus后的自动产生随机数并计算的事件
-	apb.addEventListener('click', function(){reset();
-		var random_array = get_random_array(buttons.length);
-		at_event({
-			index:0,
-			buttons:buttons,
-			info:info,
-			random_array:random_array
-		});}, false);
+	apb.addEventListener('click', function(){
+		if (this.classList.contains('enable')) {
+			reset();
+			disable(this);
+			var random_array = get_random_array(buttons.length);
+			at_event({
+				index:0,
+				buttons:buttons,
+				info:info,
+				random_array:random_array
+			});
+		}
+	}, false);
 }
 
 //创建一组随机数，并在大气泡上显示对应的字母'A'-'E'
@@ -126,11 +134,16 @@ function is_get_all() {
 
 //重置计算器
 function reset() {
+	if (xmlhttp) xmlhttp.abort();
+
 	var info = document.getElementById('info-bar');
 	disable(info);
 	var sum = document.getElementsByClassName('mysum')[0];
 	sum.innerHTML = '';
 	var buttons = document.getElementsByClassName('button');
+
+	var apb = document.getElementsByClassName('apb')[0];
+	enable(apb);
 
 	//通过调用数组的slice方法把buttons形成数组
 	buttons = [].slice.call(buttons);
@@ -158,6 +171,10 @@ function info_event() {
 	}
 	sum.innerHTML = sum_of_number();
 	disable(info);
+
+	//激活at-plus按钮
+	var apb = document.getElementsByClassName('apb')[0];
+	enable(apb);
 }
 
 
@@ -188,8 +205,7 @@ function success(temp, button, xmlhttp, options, callback) {
 //按钮事件
 function button_event(button, options, callback) {
 
-	var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsot.XMLHTTP'),
-		info = options.info,
+	var info = options.info,
 		buttons = options.buttons;
 
 	//如果此时按钮处于正在获取数据或者灭活状态则不允许进行这个事件.

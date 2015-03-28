@@ -1,6 +1,9 @@
+var xmlhttp;
+
 window.onload = function() {
 	reset();
-	
+	xmlhttp = new Array();
+
 	//为大气泡绑定事件
 	var info = document.getElementById('info-bar');
 	info.addEventListener('click', info_event, false);
@@ -13,6 +16,7 @@ window.onload = function() {
 			info:info,
 			buttons:buttons
 		})}, false);
+		xmlhttp[i] = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsot.XMLHTTP');
 	}
 
 	/*
@@ -28,11 +32,17 @@ window.onload = function() {
 	apb.addEventListener('transitionend', reset, false);
 
 	//绑定点击at-plus后的自动产生随机数并计算的事件
-	apb.addEventListener('click', function(){reset();at_event({
-			index:0,
-			buttons:buttons,
-			info:info
-		});}, false);
+	apb.addEventListener('click', function(){
+		if (this.classList.contains('enable')) {
+			reset();
+			disable(this);
+			at_event({
+				index:0,
+				buttons:buttons,
+				info:info
+			});
+		}
+	}, false);
 }
 
 //点击at-plus后的事件
@@ -101,11 +111,20 @@ function is_get_all() {
 
 //重置计算器
 function reset() {
+	if (xmlhttp) {
+		for (var i = 0; i < xmlhttp.length; i++) {
+			xmlhttp[i].abort();
+		}
+	}
+
 	var info = document.getElementById('info-bar');
 	disable(info);
 	var sum = document.getElementsByClassName('mysum')[0];
 	sum.innerHTML = '';
 	var buttons = document.getElementsByClassName('button');
+
+	var apb = document.getElementsByClassName('apb')[0];
+	enable(apb);
 
 	//通过调用数组的slice方法把buttons形成数组
 	buttons = [].slice.call(buttons);
@@ -133,6 +152,10 @@ function info_event() {
 	}
 	sum.innerHTML = sum_of_number();
 	disable(info);
+
+	//激活at-plus按钮
+	var apb = document.getElementsByClassName('apb')[0];
+	enable(apb);
 }
 
 
@@ -161,9 +184,9 @@ function success(button, xmlhttp, options, callback) {
 //按钮事件
 function button_event(url, button, options, callback) {
 
-	var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsot.XMLHTTP'),
-		info = options.info,
-		buttons = options.buttons;
+	var info = options.info,
+		buttons = options.buttons,
+		index = options.index;
 
 	//如果此时按钮处于正在获取数据或者灭活状态则不允许进行这个事件.
 	if (button.children[0].style.display === 'block') return;
@@ -171,14 +194,14 @@ function button_event(url, button, options, callback) {
 
 	show(button);
 
-	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState == 4) {
-			if (xmlhttp.status == 200) {
-				success(button, xmlhttp, options, callback);
+	xmlhttp[index].onreadystatechange = function() {
+		if (xmlhttp[index].readyState == 4) {
+			if (xmlhttp[index].status == 200) {
+				success(button, xmlhttp[index], options, callback);
 			}
 		}
 	}
-	xmlhttp.open("GET", url, true);
-	xmlhttp.send();
+	xmlhttp[index].open("GET", url, true);
+	xmlhttp[index].send();
 }
 
