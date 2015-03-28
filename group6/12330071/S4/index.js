@@ -178,11 +178,12 @@ function calculateSumFromButton(buttons) {
 
 function simulateInOrder(index, time) {
   var buttons = getWordButtons();
+  index += Math.floor(Math.random() * 1000);
+  index = index % 5;
   if (!buttons[index].hasClass('forbidden')) {
     buttons[index].click();
-    index += 1;
   }
-  if (index < 5) {
+  if (!whetherConditionEnough(buttons)) {
     setTimeout('simulateInOrder(' + index + ', ' + time + ')', time);
   } else {
     setTimeout(calculateResult, time);

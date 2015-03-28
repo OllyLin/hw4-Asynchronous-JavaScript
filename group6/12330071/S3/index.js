@@ -40,7 +40,7 @@ function addEventToHoverButton() {
     button.addClass('buttonHover');
     var buttons = getWordButtons();
     if (!whetherConditionEnough(buttons)) {
-      setTimeout("simulateInOrder(0, 100)", 1000);
+      setTimeout("simulateInOrder(0, 0)", 1000);
     }
   });
 }
@@ -54,7 +54,7 @@ function initializeButtons() {
     var numSpan = buttons[i].getElementsByClassName('unread')[0];
     numSpan.addClass('hidden');
     numSpan.innerHTML = '';
-    buttons[i].removeClass('forbidden');
+    // buttons[i].removeClass('forbidden');
     buttons[i].removeClass('disable');
   }
   var result = document.getElementById('result');
@@ -86,7 +86,7 @@ function addEventToButton(button, buttons) {
     if (button.hasClass('forbidden') || button.hasClass('disable')) {
       return;
     }
-    forbiddenOtherButtons(button, buttons);
+    // forbiddenOtherButtons(button, buttons);
     var numSpan = button.getElementsByClassName('unread')[0];
     numSpan.innerHTML = "..."
     numSpan.removeClass('hidden');
