@@ -1,33 +1,26 @@
 /*software process improvement
 homework, 04.asychronous js, javascript*/
 
-$ = function(id) {
-	return document.getElementById(id);
-};
-
 var counter_num = 0;
 
 window.onload = function () {
 	var icon = document.getElementsByClassName("icon");
 	icon[0].onclick = startCounter;
 
-	var place = $("button");
-	// place.onmouseout = end();
+	var place = document.getElementById("button");
+	place.onmouseleave = end();
 }
 
-function fakeEnd() {
-	return function(event) {
-		alert('fake');
-		event.stopPropagation();
-	}
-}
 function end() {
 	return function () {
 		var buttons = document.getElementsByClassName("button");
 		for (var i = 0; i < buttons.length; i++) {
+			buttons[i].style.backgroundColor = "rgba(48, 63, 159, 1)";
 			if (buttons[i].childNodes.length > 1)
 				buttons[i].removeChild(buttons[i].childNodes[1]);
 		}
+		var result = document.getElementsByClassName('page');
+		result[0].innerHTML = '';
 	}
 }
 
