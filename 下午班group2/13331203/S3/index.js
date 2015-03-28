@@ -8,12 +8,13 @@ function ajaxGet(item, func) {
     var xmlHttpReg = null;
     xmlHttpReg = new XMLHttpRequest();
     if (xmlHttpReg != null) {
-        xmlHttpReg.open("get", "/", true);
+        xmlHttpReg.open("get", "/"+String(Math.random()), true);
         xmlHttpReg.send(null);
         xmlHttpReg.onreadystatechange = function(){
-            func(xmlHttpReg.responseText, item);
+        	func(xmlHttpReg.responseText, item);
             item.style.background = 'grey';
             if (bigBubbleHandler()) document.getElementById('info-bar').click();
+            
         };
     }
 }
