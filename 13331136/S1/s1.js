@@ -61,12 +61,12 @@ function getDivByClassName(clName) {
 
 
 function initialization(bts) {
-	console.log("initialization");
 	for (var i = 0; i < bts.length; i++) {
 		// 给每个按钮添加一个canClick属性，表示当前按钮是否可以点击
 		bts[i].canClick = true;
 		bts[i].style.backgroundColor = "#2D3AA4";
-		bts[i].getElementsByTagName("span")[0].style.display = "...";
+		bts[i].getElementsByTagName("span")[0].style.display = "none";
+		bts[i].getElementsByTagName("span")[0].innerHTML = "...";
 	}
 	getDivByClassName("info").getElementsByTagName("span")[0].innerHTML = "";
 }
@@ -117,5 +117,6 @@ function getResult(count) {
 	plus.onclick = function() {
 		var plus = getDivByClassName("info").getElementsByTagName("span")[0];
 		plus.innerHTML = result.toString();
+		return;
 	}
 }
