@@ -7,6 +7,21 @@ window.onload = function () {
 	var icon = document.getElementsByClassName("icon");
 	icon[0].onclick = startCounter;
 	var place = document.getElementById("button");
+	place.onmouseleave = end(place);
+}
+
+function end(place) {
+	return function () {
+		var buttons = document.getElementsByClassName("button");
+		for (var i = 0; i < buttons.length; i++) {
+			buttons[i].style.backgroundColor = "rgba(48, 63, 159, 1)";
+			if (buttons[i].childNodes.length > 1)
+				buttons[i].removeChild(buttons[i].childNodes[1]);
+		}
+		var result = document.getElementsByClassName('page');
+		result[0].innerHTML = '';
+		place.removeChild(place.childNodes[0]);
+	}
 }
 
 function startCounter() {
