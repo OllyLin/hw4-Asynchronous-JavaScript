@@ -63,7 +63,7 @@ function initializeButtons() {
 
 function checkWhetherPointerOut() {
   var infoBar = document.getElementById('info-bar');
-  if (infoBar.offsetHeight < 140) {
+  if (infoBar.offsetHeight < 100) {
     return true;
   }
   return false;
