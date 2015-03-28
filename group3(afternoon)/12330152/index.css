@@ -82,6 +82,11 @@ button {
     font-size: 30px;
 }
 
+#text-above {
+    position: absolute;
+    top: -30px;
+}
+
 #displayer {
     width: 0;
     height: 0;

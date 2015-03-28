@@ -1,149 +1,192 @@
 (function() {
-    var Button = function(button, _cb) {
-        var get = function() {
-            var req = new XMLHttpRequest();
-            req.open('get', '/&random=' + Math.random());
-            req.onload = function() {
-                res = parseInt(this.responseText);
-                num.innerHTML = res;
-                num.style.opacity = 1;
-                cb(res);
+    var Button = (function() {
+        var Button = function(_button, _cb) {
+            this.reset = function() {
+                button.removeAttribute('disabled');
+                num.style.opacity = 0;
             }
-            req.send();
-            button.setAttribute('disabled', '');
-        }
-
-        this.reset = function() {
-            button.removeAttribute('disabled');
-            num.style.opacity = 0;
-        }
-
-        this.addCallback = function(_cb) {
-            var tmp = cb;
-            cb = function(res) {
-                tmp(res);
-                _cb();
-            }
-        }
-        this.click = function() {
-            button.onclick();
-        }
-
-        // init
-        var num = button.getElementsByClassName('num')[0];
-        var cb = _cb;
-        button.onclick = get;
-    }
-
-    var Displayer = function(displayer) {
-        var show = function() {
-            text.innerHTML = res;
-            text.style.opacity = 1;
-        }
-
-        this.add = function(num) {
-            res += num;
-        }
-
-        this.enable = function() {
-            displayer.removeAttribute('disabled');
-        }
-
-        this.reset = function() {
-            res = 0;
-            text.innerHTML = '';
-            text.style.opacity = 0;
-            displayer.setAttribute('disabled', 'true');
-        }
-
-        this.click = function() {
-            displayer.onclick();
-        }
-
-        // init
-        var text = document.getElementById('text');
-        var res;
-        displayer.onclick = show;
-    }
     
-    var Calculator = function() {
-        // check if the element is in the #calculator
-        var inOrigin = function(element) {
-            if (element == null) {
-                return false;
+            // for robot
+            this.click = function(_cb) {
+                click(_cb);
             }
-            if (element.id == 'calculator') {
-                return true;
+
+            var click = function(_cb) {
+                get(_cb);
+                button.setAttribute('disabled', '');
             }
-            return inOrigin(element.parentNode);
+    
+            // get data from the server
+            var get = function(_cb) {
+                var req = new XMLHttpRequest();
+                req.open('get', '/&random=' + Math.random());
+                req.onload = function() {
+                    res = parseInt(this.responseText);
+                    num.innerHTML = res;
+                    num.style.opacity = 1;
+                    cb(res);
+                    // another callback (for robot)
+                    if (_cb) {
+                        _cb();
+                    }
+                }
+                req.send();
+            }
+
+            this.id = _button.childNodes[0].nodeValue;
+
+            var button = _button;
+            var cb = _cb;
+            var num = button.getElementsByClassName('num')[0];
+            button.onclick = function() {
+                click();
+            }
         }
-        
-        // open the calculator(expanding the region)
-        var mouseover = function() {
-            calculator.setAttribute('hover', '');
-            region.setAttribute('open', '');
-        }
-        
-        var mouseout = function(evt) {
-            // check if the mouse left the whole region
-            var target = evt.relatedTarget;
-            if (inOrigin(target)) {
-                return;
+
+        return Button;
+    }());
+
+    var Displayer = (function() {
+        var instance = null;
+
+        var constructor = function(displayer) {
+            this.showText = function(str) {
+                text.innerHTML = str;
+                text.style.opacity = 1;
             }
+    
+            this.add = function(num) {
+                res += num;
+            }
+    
+            this.enable = function() {
+                displayer.removeAttribute('disabled');
+            }
+    
+            this.reset = function() {
+                res = 0;
+                text.innerHTML = '';
+                text.style.opacity = 0;
+                displayer.setAttribute('disabled', 'true');
+            }
+    
+            // for robot
+            this.click = function() {
+                displayer.onclick();
+            }
+
+            var show = function() {
+                text.innerHTML = res;
+                text.style.opacity = 1;
+            }
+
+            var text = document.getElementById('text');
+            var res;
+            displayer.onclick = show;
+        }
+
+        var Displayer = function(displayer) {
+            if (instance === null) {
+                instance = new constructor(displayer);
+            }
+            return instance;
+        }
+
+        return Displayer;
+    }());
+
+    var Calculator = (function() {
+        var instance = null;
+
+        var constructor = function() {
+            // check if the element is in the #calculator
+            var inOrigin = function(element) {
+                if (element === null) {
+                    return false;
+                }
+                if (element.id === 'calculator') {
+                    return true;
+                }
+                return inOrigin(element.parentNode);
+            }
+            
+            // open the calculator(expanding the region)
+            var mouseover = function() {
+                calculator.setAttribute('hover', '');
+                region.setAttribute('open', '');
+            }
+            
+            var mouseout = function(evt) {
+                // check if the mouse left the whole region
+                var target = evt.relatedTarget;
+                if (inOrigin(target)) {
+                    return;
+                }
+                reset();
+            }
+    
+            // reset the calculator(shrinking the region)
+            var reset = function() {
+                count = 0;
+                calculator.removeAttribute('hover');
+                region.removeAttribute('open');
+                // reset the buttons and the displayer
+                buttons.forEach(function(button) {
+                    button.reset();
+                });
+                displayer.reset();
+            }
+    
+            var add = function(num) {
+                // enable the displayer if the 5 msgs have arrived
+                if (++count === 5) {
+                    displayer.enable();
+                }
+                displayer.add(num);
+            }
+    
+            var clickNext = function() {
+                var button = buttons[count];
+                if (typeof button === 'undefined') {
+                    displayer.click();
+                } else {
+                    button.click(clickNext);
+                }
+            }
+    
+            var autoClick = function() {
+                clickNext();
+            }
+    
+            var count;
+            // init
+            var region = document.getElementById('region');
+            // init the buttons
+            var _buttons = calculator.getElementsByClassName('button');
+            var buttons = [];
+            for (var i = 0; i < _buttons.length; i++) {
+                buttons.push(new Button(_buttons[i], add));
+            }
+            // init the displayer
+            var _displayer = document.getElementById('displayer');
+            var displayer = Displayer(_displayer);
+            var atPlusButton = document.getElementById('at-plus-button');
+            atPlusButton.onclick = autoClick;
+            // attach handlers
+            calculator.onmouseover = mouseover;
+            calculator.onmouseout = mouseout;
             reset();
         }
 
-        // reset the calculator(shrinking the region)
-        var reset = function() {
-            count = 0;
-            calculator.removeAttribute('hover');
-            region.removeAttribute('open');
-            // reset the buttons and the displayer
-            buttons.forEach(function(button) {
-                button.reset();
-            });
-            displayer.reset();
-        }
-
-        var add = function(num) {
-            // enable the displayer if the 5 msgs have arrived
-            if (++count == 5) {
-                displayer.enable();
+        var Calculator = function() {
+            if (instance === null) {
+                instance = new constructor();
             }
-            displayer.add(num);
+            return instance;
         }
 
-        var autoClick = function() {
-            var button = buttons[count];
-            if (typeof button == 'undefined') {
-                displayer.click();
-            } else {
-                button.addCallback(function(res) {
-                    autoClick();
-                });
-                button.click();
-            }
-        }
-
-        var count;
-        // init
-        var region = document.getElementById('region');
-        // init the buttons
-        var _buttons = calculator.getElementsByClassName('button');
-        var buttons = [];
-        for (var i = 0; i < _buttons.length; i++) {
-            buttons.push(new Button(_buttons[i], add));
-        }
-        // init the displayer
-        var _displayer = document.getElementById('displayer');
-        var displayer = new Displayer(_displayer);
-        var atPlusButton = document.getElementById('at-plus-button');
-        atPlusButton.onclick = autoClick;
-        // attach handlers
-        calculator.onmouseover = mouseover;
-        calculator.onmouseout = mouseout;
-        reset();
-    }
+        return Calculator;
+    }());
 
     window.Calculator = Calculator;
 }());
