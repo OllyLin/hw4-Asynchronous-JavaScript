@@ -33,7 +33,7 @@ function clearButtons(event) {
 		if (redBackground) {
 			buttons[i].className = buttons[i].className.replace(/ disabled-buttons/g, ""); // 使背景变回激活时的样式
 			buttons[i].removeChild(buttons[i].firstChild);
-			buttons[i].addEventListener('click', getRandomNum); // 移除点击事件处理器
+			buttons[i].addEventListener('click', getRandomNum); // 增加点击事件处理器
 		}
 	}
 }
@@ -44,13 +44,14 @@ function getRandomNum(event) {
 	var buttons = document.getElementsByClassName("buttons"); // 得到所有button对象
 	disableOtherButtons(buttons); // 使其他未点击的按钮变灰
 	this.removeEventListener('click', getRandomNum); // 移除本身的点击事件处理器
-	this.className += " disabled-buttons"; // 使背景变灰，字体变白
+	var thisButton = this;
 
 	var client = new XMLHttpRequest();
 	client.open("GET","http://localhost:3000/",true);
 	client.onreadystatechange = function() {
-        if(client.readyState == 4){
-            if(client.status == 200){
+        if (client.readyState == 4) {
+            if (client.status == 200) {
+               thisButton.className += " disabled-buttons"; // 使背景变灰，字体变白
                text.innerHTML = client.responseText;
                var activeButtonsNum = 0; // 已经被点击的button数目
                for (var i = 0; i < buttons.length; i++) {
