@@ -3,6 +3,7 @@ window.onload = function() {
 }
 
 var init = function() {
+	RESET = window.setTimeout(reset, 2000);
 	buttons = document.getElementsByClassName('button');
 	nums = []
 	total = document.getElementsByClassName('total')[0];
@@ -18,15 +19,15 @@ var init = function() {
 		if (this.style.cursor == "pointer") {
 			total.style.visibility = "visible";
 			this.style.cursor = "auto";
+			console.log("Sum of the 5 numbers is " + total.innerHTML);
 		}
 	})
-	document.getElementsByClassName("button")[0].addEventListener("mouseleave", function() {
-		console.log("Mouse Leave.");
+	field = document.getElementById("button");
+	field.addEventListener("mouseleave", function() {
 		notEnter = true;
-		RESET = window.setTimeout(function() {reset();}, 2000);
+		RESET = window.setTimeout(reset, 2000);
 	});
-	document.getElementsByClassName("button")[0].addEventListener("mouseenter", function() {
-		console.log("Mouse Enter");
+	field.addEventListener("mouseenter", function() {
 		notEnter = false;
 		window.clearTimeout(RESET);
 	})
@@ -35,7 +36,6 @@ var init = function() {
 var addEventHandler = function(index) {
 	var button = buttons[index];
 	button.addEventListener("click", function() {
-		console.log(this.style.cursor);
 		if (this.style.cursor != "auto") {
 			getRandomNumber(index);
 			nums[index].style.visibility="visible";
@@ -69,7 +69,7 @@ var getRandomNumber = function(index) {
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 			nums[index].innerHTML = xmlhttp.responseText;
-			console.log(xmlhttp.responseText);
+			console.log("Value of " + ("No." + (index + 1)) + " is " + xmlhttp.responseText);
 			setButtonsStatus(true);
 			checkAll();
 		}
