@@ -1,0 +1,145 @@
+body{
+	background-color: white;
+	text-align: center;
+	font-family: "微软雅黑";
+}
+ul{
+	margin: 0;
+	padding-left: 12px;
+	padding-top: 12px;
+}
+img{
+	cursor: pointer;
+}
+ul > li{
+	list-style-type:none;
+}
+.info_bar{
+	width: 30px;
+	height: 30px;
+	border-radius: 150px;
+	padding: auto 0;
+	position: absolute;
+	font-size: 30px;
+	line-height: 150px;
+	cursor: pointer;
+	z-index: -100;
+	transition: All 1s ease 0.8s;
+}
+.info_barHover{
+	width:150px;
+	height:150px;
+	transform:translate(-60px,-175px);
+	transition: All 1s ease;
+}
+#control-ring-container{
+	position: absolute;
+	/*z-index: -100;*/
+}
+.unread{
+	position: absolute;
+	width: 0px;
+	height: 0px;
+	border-radius: 10px;
+	background-color: rgb(250, 57, 50);
+	color: white;
+	font-size: 0;
+	line-height: 20px;
+	transition: All 1s ease 0.8s;
+}
+.button{
+	width: 0px;
+	height: 0px;
+	font-size: 0;
+	position: absolute;
+	cursor: pointer;
+	line-height: 36px;
+	border-radius: 20px;
+	background-color: rgb(48, 54, 166);
+	color: rgb(33, 146, 126);
+	transition: All 1.5s ease 0.8s;
+}
+.apb{
+	background-color: rgb(154, 160, 210);
+	width: 30px;
+	height: 30px;
+	border-radius: 20px;
+	transition: All 1s ease 1.5s;
+	z-index: 100;
+}
+.icon{
+	background-position: 50% 50%;
+	background-size: 20px 15px;
+	-webkit-background-position: 50% 50%;
+	-webkit-background-size: 20px 15px;
+	width: 30px;
+	height: 30px;
+	background-image: url(../images/atplus_white.png);
+	background-repeat: no-repeat;
+	transition: All 1s ease 1.5s;
+
+}
+#button{
+	width: 30px;
+	height: 30px;
+	margin: 0 auto;
+	margin-top: 30%;
+}
+
+.unread{
+	width: 20px;
+	height: 20px;
+	font-size: 15px;
+	transition: All 1s ease;
+}
+.maskHover{
+	transform:translate(-85px,-50px);
+}
+.historyHover{
+	transform:translate(-100px,-5px);
+}
+.messageHover{
+	transform:translate(-85px,40px);
+}
+.settingHover{
+	transform:translate(-40px,65px);
+}
+.signHover{
+	transform:translate(15px,60px);
+}
+.buttonHover{
+	width: 36px;
+	height: 36px;
+	font-size: 24px;
+	font-weight: 600;
+	transition: All 1s ease;
+}
+.apbHover{
+	transform: scale(2,2);
+	background-color: rgb(48, 54, 166);
+	border-radius: 90px;
+	transition: All 1.5s ease;
+}
+.apbHover > .iconHover{
+	background-image: url(../images/atplus_green.png);
+	transition: All 1s ease;
+}
+.gray{
+	background-color: rgb(104,104,104);
+	color: white;
+}
+.enabled{
+	background-color: rgb(126, 126, 126);
+	color: #29E49F;
+}
+.disabled{
+	background-color: rgb(104,104,104);
+	color: white;
+}
+#seq{
+	
+	position: absolute;
+	/*margin: 0 auto;*/
+	margin-top: -200px;
+	margin-left: -30px;
+}
