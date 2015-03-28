@@ -55,10 +55,10 @@ var checkAll = function() {
 	if (flag) {
 		info.style.cursor = "pointer";
 		total.innerHTML = sum.toString();
-	} else{
+	} else {
 		info.style.cursor = "auto";
 	}
-	total.style.visibility = 'hidden';
+	return flag;
 }
 
 var getRandomNumber = function(index) {

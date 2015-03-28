@@ -99,9 +99,13 @@ var reset = function() {
 
 var robot = function() {
 	console.log("Robot operation.");
+	clickFlag = []
 	for (var index = 0; index < buttons.length; index++) {
-		getRandomNumberAuto(index);
+		clickFlag[index] = false;
 	}
+	var pos = Math.floor(Math.random() * buttons.length);
+	clickFlag[pos] = true;
+	getRandomNumberAuto(pos);
 }
 
 var getRandomNumberAuto = function(index) {
@@ -115,6 +119,13 @@ var getRandomNumberAuto = function(index) {
 			if (checkAll()) {
 				setButtonsStatus(true);
 				showSum();
+			} else {
+				var pos;
+				do {
+					pos = Math.floor(Math.random() * buttons.length);
+				} while (clickFlag[pos]);
+				clickFlag[pos] = true;
+				getRandomNumberAuto(pos);
 			}
 		}
 	}
