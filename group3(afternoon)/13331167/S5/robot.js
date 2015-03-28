@@ -9,7 +9,14 @@ function robot(index, aBubbles) {
   randomList.push(5);
   showRandomList(randomList);
   var handlers = [aHandler, bHandler, cHandler, dHandler, eHandler, bubbleHandler];
-  handlers[randomList[0]](handlers, randomList, 0, currentSum);
+
+
+  try {
+    handlers[randomList[0]](handlers, randomList, 0, currentSum);
+  } catch(error) {
+    showMessage(error.message);
+    robotClickOnBubble(handlers, randomList, 0, currentSum);
+  }
 }
 
 // 显示随机序列
@@ -55,31 +62,89 @@ function robotClickOnBubble(handlers, randomList, index, currentSum) {
 function showMessage(message) {
   var oMessage = document.getElementById('message');
   oMessage.innerHTML = message;
+  removeClass(oMessage, 'error');
+}
+function showError(message) {
+  var oMessage = document.getElementById('message');
+  oMessage.innerHTML = message;
+  addClass(oMessage, 'error');
 }
 
+
 function aHandler(handlers, randomList, index, currentSum) {
-  showMessage("这是个天大的秘密");
-  robotClickOnBubble(handlers, randomList, index, currentSum);
+  try {
+    var errorNum = Math.random();
+    if (errorNum > 0.8) {
+      throw {message: "错误：这不是个天大的秘密", currentSum: currentSum};
+    } else {
+      showMessage("这是个天大的秘密");
+      robotClickOnBubble(handlers, randomList, index, currentSum);
+    }
+  } catch(error) {
+    showError(error.message);
+    robotClickOnBubble(handlers, randomList, index, currentSum);
+  }
 }
 
 function bHandler(handlers, randomList, index, currentSum) {
-  showMessage("我不知道");
-  robotClickOnBubble(handlers, randomList, index, currentSum);
+  try {
+    var errorNum = Math.random();
+    if (errorNum > 0.8) {
+      throw {message: "错误：我并非不知道", currentSum: currentSum};
+    } else {
+      showMessage("我不知道");
+      robotClickOnBubble(handlers, randomList, index, currentSum);
+    }
+  } catch(error) {
+    showError(error.message);
+    robotClickOnBubble(handlers, randomList, index, currentSum);
+  }
+
 }
 
 function cHandler(handlers, randomList, index, currentSum) {
-  showMessage("你不知道");
-  robotClickOnBubble(handlers, randomList, index, currentSum);
+  try {
+    var errorNum = Math.random();
+    if (errorNum > 0.8) {
+      throw {message: "错误：你并非不知道", currentSum: currentSum};
+    } else {
+      showMessage("你不知道");
+      robotClickOnBubble(handlers, randomList, index, currentSum);
+    }
+  } catch(error) {
+    showError(error.message);
+    robotClickOnBubble(handlers, randomList, index, currentSum);
+  }
 }
 
 function dHandler(handlers, randomList, index, currentSum) {
-  showMessage("他不知道");
-  robotClickOnBubble(handlers, randomList, index, currentSum);
+  try {
+    var errorNum = Math.random();
+    if (errorNum > 0.8) {
+      throw {message: "错误：他并非不知道", currentSum: currentSum};
+    } else {
+      showMessage("他不知道");
+      robotClickOnBubble(handlers, randomList, index, currentSum);
+    }
+  } catch(error) {
+    showError(error.message);
+    robotClickOnBubble(handlers, randomList, index, currentSum);
+  }
 }
 
 function eHandler(handlers, randomList, index, currentSum) {
-  showMessage("才怪");
-  robotClickOnBubble(handlers, randomList, index, currentSum);
+  try {
+    var errorNum = Math.random();
+    if (errorNum > 0.8) {
+      throw {message: "错误：才怪你妹", currentSum: currentSum};
+    } else {
+      showMessage("才怪");
+      robotClickOnBubble(handlers, randomList, index, currentSum);
+    }
+  } catch(error) {
+    showError(error.message);
+    robotClickOnBubble(handlers, randomList, index, currentSum);
+  }
 }
 
 function bubbleHandler(handlers, randomList, index, currentSum) {
