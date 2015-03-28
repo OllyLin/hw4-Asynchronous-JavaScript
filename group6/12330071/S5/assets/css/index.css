@@ -302,12 +302,14 @@ div.buttonHover .sign {
   color: rgba(89,193,147,1);
   font-weight: bolder;
   text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
   font-size: 0;
   transition: all 0.5s;
 }
 
 div.buttonHover #result {
-  font-size: 36px;
+  font-size: 20px;
 }
 
 div.buttonHover li.forbidden {

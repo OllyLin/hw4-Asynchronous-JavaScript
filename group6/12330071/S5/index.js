@@ -156,7 +156,7 @@ function calculateResult() {
   var buttons = getWordButtons();
   var sum = calculateSumFromButton(buttons);
   var result = document.getElementById('result');
-  result.innerHTML = sum;
+  result.innerHTML = '楼主异步调用战斗力感人，目测不超过' + sum;
 }
 
 function whetherConditionEnough(buttons) {
@@ -192,7 +192,7 @@ var simulateInOrder = function() {
   var orderList;
   var func = [aHandler, bHandler, cHandler, dHandler, eHandler];
   return function() {
-    if (index > 5) {
+    if (index >= 5) {
       calculateResult();
       return;
     }
