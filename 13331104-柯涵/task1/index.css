@@ -1,0 +1,206 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#at-plus-container {
+	position: fixed;
+	bottom: 100px;
+	left: 750px;
+}
+
+li {
+	list-style: none;
+}
+
+.apb {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background-color: #7D9EC0;
+	transform: scale(0.8, 0.8);
+	transition: 0.5s;
+}
+
+#white {
+	position: absolute;
+	top: 10px;
+	left: 6px;
+	opacity: 1;
+	transition: 0.3s;
+}
+
+#green {
+	position: absolute;
+	top: -5px;
+	left: -13px;
+	opacity: 0;
+	transform: scale(0.5, 0.5);
+	transition: 0.5s;
+}
+
+#info-bar {
+	width: 130px;
+	height: 130px;
+	border-radius: 50%;
+	position: absolute;
+	top: -32px;
+	left: -48px;
+	transform: scale(0.3, 0.3);
+	background-color: gray;
+	opacity: 0;
+	transition: 0.5s;
+}
+
+#info-bar li {
+	position: absolute;
+}
+
+#info-bar img {
+	float: left;
+	margin: -2px 2px 0 0;
+}
+
+#info-bar span {
+	font-weight: bold;
+	color: white;
+	margin: 4px;
+}
+
+#info-bar .page_user {
+	top: 12px;
+	left: 47px;
+}
+
+#info-bar .page_comment {
+	top: 45px;
+	left: 48px;
+	font-size: 22px;
+	transform: scale(1.5, 1.5);
+}
+
+#info-bar .page_comment img {
+	margin: 1px 2px 0 0;
+}
+
+#info-bar .mine_posted {
+	top: 83px;
+	left: 26px;
+}
+
+#info-bar .mine_posted span {
+	color: #3CB371;
+}
+
+#info-bar .mine_like {
+	top: 83px;
+	left: 71px;
+}
+
+#info-bar .mine_like span {
+	color: #3CB371;
+}
+
+#control-ring-container li {
+	width: 42px;
+	height: 42px;
+	left: -1px;
+	top: 17px;
+	opacity: 0;
+	background-color: blue;
+	border-radius: 50%;
+	position: absolute;
+	transform: scale(0.8, 0.8);
+	transition: 0.5s;
+}
+
+#control-ring-container img {
+	padding: 8px 9px;
+}
+
+#at-plus-container:hover #info-bar {
+	transform: scale(1, 1);
+	opacity: 1;
+	top: -144px;
+	left: -44px;
+}
+
+#at-plus-container:hover .a {
+	left: -66px;
+	top: -15px;
+	opacity: 1;
+}
+
+#at-plus-container:hover .b {
+	left: -72px;
+	top: 27px;
+	opacity: 1;
+}
+
+
+#at-plus-container:hover .c {
+	left: -58px;
+	top: 68px;
+	opacity: 1;
+}
+
+
+#at-plus-container:hover .d {
+	left: -12px;
+	top: 84px;
+	opacity: 1;
+}
+
+
+#at-plus-container:hover .e {
+	left: 36px;
+	top: 76px;
+	opacity: 1;
+}
+
+
+.unread {
+	width: 24px;
+	height: 24px;
+	padding: 2px 0 0 0;
+	top: -5px;
+	right: -10px;
+	text-align: center;
+	color: white;
+	position: absolute;
+	background-color: #FF3030;
+	border-radius: 50%;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+}
+
+#at-plus-container:hover .apb {
+	background-color: blue;
+	transform: scale(1.6, 1.6);
+}
+
+#at-plus-container:hover #green {
+	visibility: visible;
+	opacity: 1;
+}
+
+#at-plus-container:hover #white {
+	visibility: hidden;
+	opacity: 0;
+}
+
+div.sum {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 43px;
+	left: 43px;
+	font-size: 40px;
+	color: rgb(53, 218, 158);
+}
+
+div#all {
+	width: 300px;
+	height: 400px;
+	position: absolute;
+	left: 620px;
+}
