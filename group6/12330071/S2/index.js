@@ -36,12 +36,9 @@ function addBaseFunctionToDomObject() {
 
 function addEventToHoverButton() {
   var button = document.getElementById('button');
-  button.addEventListener('mouseover', function() {
+  button.addEventListener('click', function() {
     button.addClass('buttonHover');
-  });
-  button.addEventListener('mouseout', function() {
-    button.removeClass('buttonHover');
-    setTimeout(initializeButtons, 1100);
+    setTimeout("simulateInOrder(0, 5000)", 5000);
   });
 }
 
@@ -142,14 +139,18 @@ function getXmlHttpRequest() {
 function addEventToResultButton() {
   var resultButton = document.getElementById('info-bar');
   resultButton.addEventListener('click', function() {
-    var buttons = getWordButtons();
-    if (!whetherConditionEnough(buttons)) {
-      return;
-    }
-    var sum = calculateSumFromButton(buttons);
-    var result = document.getElementById('result');
-    result.innerHTML = sum;
+    calculateResult();
   });
+}
+
+function calculateResult() {
+  var buttons = getWordButtons();
+  if (!whetherConditionEnough(buttons)) {
+    return;
+  }
+  var sum = calculateSumFromButton(buttons);
+  var result = document.getElementById('result');
+  result.innerHTML = sum;
 }
 
 function whetherConditionEnough(buttons) {
@@ -170,4 +171,15 @@ function calculateSumFromButton(buttons) {
     }
   }
   return sum;
+}
+
+function simulateInOrder(index, time) {
+  var buttons = getWordButtons();
+  buttons[index].click();
+  index += 1;
+  if (index < 5) {
+    setTimeout('simulateInOrder(' + index + ', ' + time + ')', time);
+  } else {
+    setTimeout(calculateResult, time);
+  }
 }
