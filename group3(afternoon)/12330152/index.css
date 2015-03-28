@@ -1,0 +1,170 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    border: none;
+    outline: none;
+}
+
+#calculator {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+#calculator * {
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+#calculator[hover] * {
+    opacity: 1;
+}
+
+#region {
+    position: absolute;
+    z-index: -1;
+    width: 28px;
+    height: 28px;
+    left: -14px;
+    top: -14px;
+}
+
+#region[open] {
+    width: 155px;
+    height: 245px;
+    left: -90px;
+    top: -165px;
+}
+
+#at-plus-button, #displayer, .button, .num {
+    border-radius: 50%;
+    position: absolute;
+}
+
+#displayer, .button, .num {
+    text-align: center;
+}
+
+#at-plus-button, .button {
+    color: #20907D;
+}
+
+#at-plus-button {
+    opacity: 1 !important;
+    background-position: center;
+    background-size: 75% 55%;
+    background-repeat: no-repeat;
+    width: 28px;
+    height: 28px;
+    left: -14px;
+    top: -14px;
+    background-image: url(assets/images/atplus_white.png);
+    background-color: #999DCC;
+}
+
+#calculator[hover] #at-plus-button {
+    width: 50px;
+    height: 50px;
+    left: -25px;
+    top: -25px;
+    background-image: url(assets/images/atplus_green.png);
+}
+
+#text {
+    width: 100%;
+    height: 100%;
+    line-height: 130px;
+    color: #35DAA0;
+    font-weight: 900;
+    font-size: 30px;
+}
+
+#text-above {
+    position: absolute;
+    top: -30px;
+}
+
+#displayer {
+    width: 0;
+    height: 0;
+    left: 0;
+    top: 0;
+    background-color: #7E7E7E;
+}
+
+#calculator[hover] #displayer {
+    width: 128px;
+    height: 128px;
+    left: -64px;
+    top: -163px;
+}
+
+#calculator[hover] #at-plus-button, .button {
+    background-color: #20459E;
+}
+
+.button[disabled] {
+    background-color: #7E7E7E;
+}
+
+.button {
+    width: 0;
+    height: 0;
+    line-height: 0;
+    left: 0;
+    top: 0;
+    font-size: 0;
+    font-weight: 900;
+}
+
+#calculator[hover] .button {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 18px;
+}
+
+.num {
+    width: 0;
+    height: 0;
+    line-height: 22px;
+    left: 22px;
+    top: -6px;
+    color: #fff;
+    background-color: #FC403C;
+    font-size: 14px;
+    font-weight: 100;
+}
+
+#calculator[hover] .num {
+    width: 22px;
+    height: 22px;
+}
+
+#calculator[hover] .A {
+    left: -79px;
+    top: -51px;
+}
+
+#calculator[hover] .B {
+    left: -91px;
+    top: -13px;
+}
+
+#calculator[hover] .C {
+    left: -75px;
+    top: 25px;
+}
+
+#calculator[hover] .D {
+    left: -41px;
+    top: 47px;
+}
+
+#calculator[hover] .E {
+    left: 3px;
+    top: 43px;
+}
