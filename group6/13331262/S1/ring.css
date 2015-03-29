@@ -1,0 +1,157 @@
+li {
+	list-style: none;
+}
+
+/*整个菜单*/
+#button {
+	position: relative;
+	right: 50%;
+	bottom: -450px;
+	height: 500px;
+	-webkit-transition-property: width, height;
+	-webkit-transition-duration: 0.5s;
+	-webkit-transition-timing-function: ease;
+	-webkit-transition-delay: 0.5s;
+}
+
+
+/*@+标志*/
+.icon {
+	position: absolute;
+	bottom: 60px;
+	right: 0;
+	width: 30px;
+	height: 30px;
+	border-radius: 50px;
+	background-color: #ADD8E6;
+	background-image: url(assets/images/atplus_white.png);
+	background-size:20px,20px;
+	background-repeat: no-repeat;
+	background-position: center;
+	-webkit-transition-property: background-color, -webkit-transform, background-image,background-size;
+	-webkit-transition-duration: 0.5s;
+	-webkit-transition-timing-function: ease;
+	-webkit-transition-delay: 0.5s;
+}
+
+#button:hover .icon {
+	background-size: 25px,30px;
+	background-color: rgba(48, 63, 159, 1);
+	-webkit-transform: scale(2,2);
+	background-image: url(assets/images/atplus_green.png);
+}
+
+.icon img {
+	position: absolute;
+	top: 7px;
+	right: 5px;
+}
+/*大圆圈闪现动画*/
+.info {
+	position: absolute;
+	bottom: 60px;
+	right: 0;
+	width: 30px;
+	height: 30px;
+	background-color:none;
+	border-radius: 80px;
+	overflow: hidden;
+
+	-webkit-transition-property: background-color,right,bottom,width,height;
+	-webkit-transition-duration: 0.5s;
+	-webkit-transition-timing-function: ease;
+	-webkit-transition-delay: 0.5s;
+
+}
+/*大圆圈位置*/
+#button:hover .info {
+	position: absolute;
+	right: -50px;
+	bottom: 120px;
+	width: 130px;
+	height: 130px;
+	background-color: gray;
+}
+
+/*小圆圈闪现动画*/
+#control-ring li {
+	position: absolute;
+	bottom: 60px;
+	right: 0;
+	width: 32px;
+	height:32px;
+	border-radius: 50px;
+	background-color: none;
+    -webkit-transition-property: background-color,right,bottom;
+	-webkit-transition-duration: 0.5s;
+	-webkit-transition-timing-function: ease;
+	-webkit-transition-delay: 0.5s;
+}
+/*小圆圈位置*/
+#button:hover .a {
+	bottom: 98px;
+	right: 75px;
+	background-color: rgba(48, 63, 159, 1);
+}
+
+#button:hover .b {
+	bottom: 60px;
+	right: 88px;
+	background-color: rgba(48, 63, 159, 1);
+}
+
+#button:hover .c {
+	bottom: 25px;
+	right: 70px;
+	background-color: rgba(48, 63, 159, 1);
+}
+
+#button:hover .d {
+	bottom: 5px;
+	right: 25px;
+	background-color: rgba(48, 63, 159, 1);
+}
+
+#button:hover .e {
+	bottom: 10px;
+	right: -20px;
+	background-color: rgba(48, 63, 159, 1);
+}
+
+/*文字css*/
+.text {
+	font-family: "Microsoft YaHei";
+	color: #00CC99;
+	font-weight: 700;
+	position: absolute;
+	right: 12px;
+	top: 5px;
+}
+
+/*红色圆圈*/
+.red {
+	text-align: center;
+	line-height: 19px;
+	color: white;
+	position: absolute;
+	top: -6px;
+	right: -6px;
+	width: 18px;
+	height: 18px;
+	border-radius: 50px;
+	background-color: red;
+	font-weight: bold;
+	font-family: "Microsoft YaHei";
+	font-size: 12px;
+	overflow: visible;
+}
+
+.big {
+	font-family: "Microsoft YaHei";
+	color: #00CC99;
+	font-weight: 700;
+	position: absolute;
+	right: 45px;
+	top: 25px;
+	font-size: 30px;
+}
