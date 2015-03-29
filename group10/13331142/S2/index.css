@@ -1,0 +1,251 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+ul li {
+    list-style: none;
+}
+html,
+body {
+    width: 100%;
+    height: 100%;
+
+    font-family: "黑体";
+}
+
+#at-plus-container {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+
+    width: 30px;
+    height: 30px;
+    margin-left: -15px;
+
+    cursor: pointer;
+    -webkit-transition: all .8s;
+         -o-transition: all .8s;
+            transition: all .8s;
+}
+
+/* 定位 */
+#bottom-positioner {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    -webkit-transition: all .8s;
+         -o-transition: all .8s;
+            transition: all .8s;
+}
+
+.apb {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 30px;
+    height: 30px;
+
+    -webkit-transition: all .3s .6s;
+         -o-transition: all .3s .6s;
+            transition: all .3s .6s;
+
+    border-radius: 50%;
+    background-color: rgba(0,0,60,.4);
+}
+
+.icon {
+    width: 100%;
+    height: 100%;
+
+    -webkit-transition: all .3s .6s;
+         -o-transition: all .3s .6s;
+            transition: all .3s .6s;
+
+    background-image: url(assets/images/atplus_white.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: 20px;
+            background-size: 20px;
+}
+
+#info-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    overflow: hidden;
+
+    width: 30px;
+    height: 30px;
+
+    -webkit-transition: all .8s;
+         -o-transition: all .8s;
+            transition: all .8s;
+
+    opacity: 0;
+    border-radius: 50%;
+}
+
+.info {
+    position: relative;
+
+    font-size: 30pt;
+    color: #079e6e;
+
+    width: 120px;
+    height: 120px;
+}
+
+.info p {
+    position: absolute;
+    left: 37px;
+    top: 40px;
+}
+
+#control-ring .button {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 30px;
+    height: 30px;
+
+    -webkit-transition: all .8s;
+         -o-transition: all .8s;
+            transition: all .8s;
+
+    opacity: 0;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: 16px;
+            background-size: 16px;
+}
+
+.enable {
+    background-color: rgba(48,63,159,1);
+}
+
+.disable {
+    background-color: rgba(0,0,20,.6);
+}
+
+#control-ring li p {
+    position: relative;
+    left: 9px;
+
+    font-size: 20pt;
+    font-weight: bold;
+    color: #079e6e;
+
+}
+
+.unread {
+    font-size: 10pt;
+
+    position: absolute;
+    top: -4px;
+    right: -6px;
+
+    width: 15px;
+    height: 15px;
+
+    text-align: center;
+
+    color: #fff;
+    border-radius: 50%;
+    background-color: red;
+
+    display: none;
+}
+#at-plus-container:hover {
+    bottom: 0;
+    left: calc(50% - 100px);
+
+    width: 200px;
+    height: 200px;
+
+    -webkit-transition: all .8s;
+         -o-transition: all .8s;
+            transition: all .8s;
+}
+
+#at-plus-container:hover #bottom-positioner {
+    top: 70px;
+    left: 100px;
+
+    -webkit-transition: all .8s;
+         -o-transition: all .8s;
+            transition: all .8s;
+}
+
+#at-plus-container:hover #info-bar {
+    top: -150px;
+    left: -40px;
+
+    width: 120px;
+    height: 120px;
+
+    -webkit-transition: all .8s;
+         -o-transition: all .8s;
+            transition: all .8s;
+
+    opacity: 1;
+}
+#at-plus-container:hover .apb {
+    top: -10px;
+    left: -10px;
+
+    width: 50px;
+    height: 50px;
+
+    -webkit-transition: all .8s;
+         -o-transition: all .8s;
+            transition: all .8s;
+
+    border-radius: 50%;
+    background-color: rgba(48,63,159,1);
+}
+#at-plus-container:hover .icon {
+    -webkit-transition: all .8s;
+         -o-transition: all .8s;
+            transition: all .8s;
+
+    background-image: url(assets/images/atplus_green.png);
+    -webkit-background-size: 40px;
+            background-size: 40px;
+}
+
+#at-plus-container:hover .button {
+    -webkit-transition: all .8s, background-color .1s;
+         -o-transition: all .8s, background-color .1s;
+            transition: all .8s, background-color .1s;
+
+    opacity: 1;
+}
+
+#at-plus-container:hover .A.button {
+    top: -30px;
+    left: -54px;
+}
+
+#at-plus-container:hover .B.button {
+    top: 5px;
+    left: -65px;
+}
+#at-plus-container:hover .C.button {
+    top: 40px;
+    left: -54px;
+}
+
+#at-plus-container:hover .D.button {
+    top: 60px;
+    left: -24px;
+}
+
+#at-plus-container:hover .E.button {
+    top: 60px;
+    left: 16px;
+}

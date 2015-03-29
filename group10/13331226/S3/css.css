@@ -1,0 +1,150 @@
+body {
+	font-weight: bold;
+	font-family:Arial,Verdana,Sans-serif
+}
+
+#at-plus-container {
+	position: fixed;
+	bottom: 70px;
+	left: 50%;
+	margin-left: -15px;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+}
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.icon {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	/* position */
+	position: relative;
+	/* bg */
+	background-image: url("assets/images/atplus_white.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: rgb(200,200,200);
+	/**/
+	transition: all 1s;
+}
+
+#at-plus-container:hover .apb {
+	position: absolute;
+	left: 80px;
+}
+#at-plus-container:hover .icon {
+	bottom: 5px;
+	/**/
+	width: 40px;
+	height: 40px;
+	background-color: rgba(48,63,159,1);
+	background-image: url("assets/images/atplus_green.png");
+    background-size: 35px;
+}
+#at-plus-container:hover {
+	width: 200px;
+	height: 200px;
+	bottom: 15px;
+	left: 50%;
+	margin-left: -100px;
+}
+
+
+.info {
+	position: absolute;
+	width: 30px;
+	height: 20px;	
+	padding-top: 10px;
+	border-radius: 50%;
+	background-color: rgb(144,144,144);
+	opacity: 0;
+	transition: top 1s, width 1s, height 1s, padding 1s;
+}
+#at-plus-container:hover .info {
+	width: 90px;
+	height: 60px;
+	/* position */
+	position: absolute;
+	top: -100px;
+	left: 55px;
+	opacity: 1;	
+	color: rgb(89, 193, 197);
+	font-size: 24px;
+	padding-top: 30px;
+}
+
+#control-ring-container {
+	position: absolute;
+	width: 28px;
+	left: 50%;
+	margin-left: -14px;
+}
+li {
+	width: 28px;
+	height: 23px;
+	border-radius: 50%;
+	background-color: rgba(48,63,159,1);
+	color: rgb(89, 193, 197);
+	/* position */
+	position: absolute;
+	left: 70px;
+	padding-top: 5px;
+	opacity: 0;
+	
+}
+
+#at-plus-container:hover .button {
+	opacity: 1;
+}
+#at-plus-container:hover .mask {
+	top: -30px;
+    left: 50px;
+    transition: all 1s;
+}
+#at-plus-container:hover .history {
+	top: 5px;
+    left: 40px;
+    transition: all 1s;
+}
+#at-plus-container:hover .message {
+	top: 35px;
+    left: 55px;
+    transition: all 1s;
+}
+#at-plus-container:hover .setting {
+    top: 55px;
+    left: 90px;
+    transition: all 1s;
+}
+#at-plus-container:hover .sign {
+    top: 50px;
+    left: 130px;
+    transition: all 1s;
+}
+
+#at-plus-container:hover #bottom-positioner {
+	position: absolute;
+	bottom: 90px;
+} 
+.unread {
+	width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    position: absolute;
+    top: -4px;
+    right: -6px;
+    color: #fff;
+    background-color: red;
+    font-size: 10px;
+    text-align: center;
+}
+
+
+.hasData, .frozen {
+	background-color: rgb(144,144,144);
+}
